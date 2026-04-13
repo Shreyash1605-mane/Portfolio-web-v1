@@ -111,8 +111,11 @@ export default function HeroSection() {
 
       {/* Gradient overlays */}
       <div className="absolute inset-0 bg-gradient-to-b from-cyber-darker/60 via-transparent to-background pointer-events-none" />
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-neon-blue/5 rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-neon-blue/3 rounded-full blur-[100px] pointer-events-none" />
+
+      {/* Animated blobs for depth */}
+      <div className="absolute top-10 -right-20 w-[500px] h-[500px] bg-neon-blue/[0.07] blob pointer-events-none blur-sm" />
+      <div className="absolute -bottom-20 -left-10 w-[400px] h-[400px] bg-neon-glow/[0.06] blob blob-delay-1 pointer-events-none blur-sm" />
+      <div className="absolute top-1/2 left-1/3 w-[300px] h-[300px] bg-neon-blue/[0.04] blob blob-delay-2 pointer-events-none blur-sm" />
 
       {/* Animated grid lines */}
       <div className="absolute inset-0 grid-bg pointer-events-none opacity-50" />
@@ -187,7 +190,7 @@ export default function HeroSection() {
             >
               <a
                 href="#"
-                className="group inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-neon-blue hover:bg-neon-blue/90 text-white font-semibold rounded-lg transition-all duration-300 shadow-lg shadow-neon-blue/25 hover:shadow-neon-blue/40 hover:scale-[1.02] active:scale-[0.98]"
+                className="group inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-neon-blue hover:bg-neon-blue/90 text-silver font-semibold rounded-lg transition-all duration-300 shadow-lg shadow-neon-blue/15 hover:shadow-neon-blue/30 hover:scale-[1.02] active:scale-[0.98]"
               >
                 <Download className="w-4 h-4 transition-transform group-hover:-translate-y-0.5" />
                 Download Resume
@@ -262,6 +265,7 @@ export default function HeroSection() {
                     src="/images/headshot.png"
                     alt="Shreyash Mane"
                     fill
+                    sizes="(max-width: 768px) 256px, (max-width: 1024px) 320px, 384px"
                     className="object-cover rounded-full"
                     priority
                   />
@@ -288,7 +292,7 @@ export default function HeroSection() {
               <motion.div
                 animate={{ y: [0, -8, 0] }}
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -top-4 -right-4 sm:top-0 sm:-right-8 px-3 py-1.5 bg-cyber-card border border-cyber-border rounded-lg text-xs font-mono text-neon-blue shadow-lg shadow-black/20"
+                className="absolute -top-4 -right-4 sm:top-0 sm:-right-8 px-3 py-1.5 bg-cyber-card border border-cyber-border rounded-lg text-xs font-mono text-[#C2410C] shadow-lg shadow-black/20"
               >
                 🔒 Cybersecurity
               </motion.div>
@@ -300,7 +304,7 @@ export default function HeroSection() {
                   ease: "easeInOut",
                   delay: 0.5,
                 }}
-                className="absolute -bottom-4 -left-4 sm:bottom-4 sm:-left-8 px-3 py-1.5 bg-cyber-card border border-cyber-border rounded-lg text-xs font-mono text-neon-blue shadow-lg shadow-black/20"
+                className="absolute -bottom-4 -left-4 sm:bottom-4 sm:-left-8 px-3 py-1.5 bg-cyber-card border border-cyber-border rounded-lg text-xs font-mono text-[#C2410C] shadow-lg shadow-black/20"
               >
                 📊 Data Science
               </motion.div>
@@ -312,7 +316,7 @@ export default function HeroSection() {
                   ease: "easeInOut",
                   delay: 1,
                 }}
-                className="absolute top-1/2 -right-8 sm:-right-12 px-3 py-1.5 bg-cyber-card border border-cyber-border rounded-lg text-xs font-mono text-neon-blue shadow-lg shadow-black/20"
+                className="absolute top-1/2 -right-8 sm:-right-12 px-3 py-1.5 bg-cyber-card border border-cyber-border rounded-lg text-xs font-mono text-[#C2410C] shadow-lg shadow-black/20"
               >
                 🏆 Silver Medalist
               </motion.div>
@@ -324,7 +328,7 @@ export default function HeroSection() {
                   ease: "easeInOut",
                   delay: 0.8,
                 }}
-                className="absolute -top-2 -left-8 sm:-left-12 px-3 py-1.5 bg-cyber-card border border-cyber-border rounded-lg text-xs font-mono text-neon-blue shadow-lg shadow-black/20"
+                className="absolute -top-2 -left-8 sm:-left-12 px-3 py-1.5 bg-cyber-card border border-cyber-border rounded-lg text-xs font-mono text-[#C2410C] shadow-lg shadow-black/20"
               >
                 🤖 IoT
               </motion.div>

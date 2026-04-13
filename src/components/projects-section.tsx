@@ -140,6 +140,7 @@ export default function ProjectsSection() {
                       src={proj.image}
                       alt={proj.title}
                       fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       className="object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-cyber-card via-transparent to-transparent" />
@@ -206,7 +207,7 @@ export default function ProjectsSection() {
                           e.stopPropagation();
                           setSelectedProject(index);
                         }}
-                        className="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2.5 bg-neon-blue hover:bg-neon-blue/90 text-white rounded-lg text-sm font-medium transition-all duration-300"
+                        className="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2.5 bg-neon-blue hover:bg-neon-blue/90 text-silver rounded-lg text-sm font-medium transition-all duration-300"
                       >
                         <ExternalLink className="w-4 h-4" />
                         Details
@@ -257,6 +258,7 @@ export default function ProjectsSection() {
                   src={project.image}
                   alt={project.title}
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   className="object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-cyber-card via-transparent to-transparent" />

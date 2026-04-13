@@ -15,9 +15,9 @@ const milestones = [
     icon: Trophy,
     title: "National Recognition",
     badge: "India Skills 2025-26",
-    color: "text-yellow-400",
-    borderColor: "border-yellow-400/20 hover:border-yellow-400/40",
-    bgColor: "bg-yellow-400/10",
+    color: "text-amber-700",
+    borderColor: "border-amber-700/20 hover:border-amber-700/40",
+    bgColor: "bg-amber-700/10",
     content: (
       <div className="space-y-4">
         <p className="text-silver-dim leading-relaxed">
@@ -34,7 +34,7 @@ const milestones = [
           {["National Level", "2025-26", "Silver Medal"].map((tag) => (
             <span
               key={tag}
-              className="px-3 py-1 bg-yellow-400/10 text-yellow-400 rounded-full text-xs font-medium border border-yellow-400/20"
+              className="px-3 py-1 bg-amber-700/10 text-amber-700 rounded-full text-xs font-medium border border-amber-700/20"
             >
               {tag}
             </span>
@@ -48,25 +48,25 @@ const milestones = [
     icon: Medal,
     title: "Regional & State Wins",
     badge: "Landscape Gardening",
-    color: "text-emerald-400",
-    borderColor: "border-emerald-400/20 hover:border-emerald-400/40",
-    bgColor: "bg-emerald-400/10",
+    color: "text-emerald-700",
+    borderColor: "border-emerald-700/20 hover:border-emerald-700/40",
+    bgColor: "bg-emerald-700/10",
     content: (
       <div className="space-y-4">
         <p className="text-silver-dim leading-relaxed">
           Demonstrated excellence at both regional and state levels in Landscape
           Gardening competitions. Won{" "}
-          <span className="text-emerald-400 font-semibold">
+          <span className="text-emerald-700 font-semibold">
             Silver Medal in Ahmedabad
           </span>{" "}
           and secured the{" "}
-          <span className="text-emerald-400 font-semibold">
+          <span className="text-emerald-700 font-semibold">
             Gold Medal in Mumbai
           </span>
           , showcasing versatility and competitive drive beyond technology.
         </p>
-        <div className="p-3 bg-emerald-400/5 rounded-lg border border-emerald-400/10">
-          <div className="text-sm font-semibold text-emerald-400 mb-1">
+        <div className="p-3 bg-emerald-700/5 rounded-lg border border-emerald-700/10">
+          <div className="text-sm font-semibold text-emerald-700 mb-1">
             Cash Prize Awarded
           </div>
           <div className="text-2xl font-bold text-silver">₹25,000</div>
@@ -75,7 +75,7 @@ const milestones = [
           {["Ahmedabad Silver", "Mumbai Gold", "₹25,000 Prize"].map((tag) => (
             <span
               key={tag}
-              className="px-3 py-1 bg-emerald-400/10 text-emerald-400 rounded-full text-xs font-medium border border-emerald-400/20"
+              className="px-3 py-1 bg-emerald-700/10 text-emerald-700 rounded-full text-xs font-medium border border-emerald-700/20"
             >
               {tag}
             </span>
@@ -89,14 +89,14 @@ const milestones = [
     icon: Code2,
     title: "Hackathon Success",
     badge: "Smart India Hackathon",
-    color: "text-purple-400",
-    borderColor: "border-purple-400/20 hover:border-purple-400/40",
-    bgColor: "bg-purple-400/10",
+    color: "text-purple-700",
+    borderColor: "border-purple-700/20 hover:border-purple-700/40",
+    bgColor: "bg-purple-700/10",
     content: (
       <div className="space-y-4">
         <p className="text-silver-dim leading-relaxed">
           Ranked{" "}
-          <span className="text-purple-400 font-semibold">2nd place</span> in
+          <span className="text-purple-700 font-semibold">2nd place</span> in
           the Internal Smart India Hackathon conducted at DYPSEM. Developed an
           innovative solution under competitive pressure, demonstrating
           problem-solving skills, teamwork, and the ability to deliver
@@ -106,7 +106,7 @@ const milestones = [
           {["2nd Place", "DYPSEM", "Smart India Hackathon"].map((tag) => (
             <span
               key={tag}
-              className="px-3 py-1 bg-purple-400/10 text-purple-400 rounded-full text-xs font-medium border border-purple-400/20"
+              className="px-3 py-1 bg-purple-700/10 text-purple-700 rounded-full text-xs font-medium border border-purple-700/20"
             >
               {tag}
             </span>

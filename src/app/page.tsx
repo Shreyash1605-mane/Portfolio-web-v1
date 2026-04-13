@@ -11,6 +11,7 @@ import ProjectsSection from "@/components/projects-section";
 import ExperienceSection from "@/components/experience-section";
 import SkillsSection from "@/components/skills-section";
 import ContactSection from "@/components/contact-section";
+import TestimonialsSection from "@/components/testimonials-section";
 import FooterSection from "@/components/footer-section";
 
 function SectionDivider() {
@@ -41,6 +42,8 @@ export default function Home() {
         <ExperienceSection />
         <SectionDivider />
         <SkillsSection />
+        <SectionDivider />
+        <TestimonialsSection />
         <SectionDivider />
         <ContactSection />
       </main>

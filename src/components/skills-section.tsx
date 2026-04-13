@@ -108,7 +108,7 @@ export default function SkillsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: catIndex * 0.15 }}
-              className="border border-cyber-border rounded-2xl bg-cyber-card/50 backdrop-blur-sm p-6 glow-hover hover:-translate-y-1 group transition-transform duration-300"
+              className="border border-cyber-border rounded-2xl bg-cyber-card/50 backdrop-blur-sm p-6 elevated-card soft-focus-ring group"
             >
               {/* Category Header */}
               <div className="flex items-center gap-3 mb-6 pb-4 border-b border-cyber-border">
@@ -157,7 +157,7 @@ export default function SkillsSection() {
             ].map((tool) => (
               <span
                 key={tool}
-                className="px-4 py-2 bg-cyber-card border border-cyber-border rounded-full text-sm text-silver-dim hover:text-neon-blue hover:border-neon-blue/30 hover:bg-neon-blue/5 transition-all duration-300 cursor-default"
+                className="px-4 py-2 bg-cyber-card border border-cyber-border rounded-full text-sm text-[#374151] hover:text-neon-blue hover:border-neon-blue/30 hover:bg-neon-blue/5 transition-all duration-300 cursor-default"
               >
                 {tool}
               </span>

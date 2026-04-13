@@ -86,7 +86,7 @@ export default function WhatIDoSection() {
               className="group"
             >
               <div
-                className={`relative h-full p-6 rounded-2xl border ${item.borderColor} ${item.bgColor} backdrop-blur-sm transition-all duration-400 glow-hover hover:-translate-y-1 card-shine`}
+                className={`relative h-full p-6 rounded-2xl border ${item.borderColor} ${item.bgColor} backdrop-blur-sm elevated-card card-shine soft-focus-ring`}
               >
                 {/* Icon */}
                 <div

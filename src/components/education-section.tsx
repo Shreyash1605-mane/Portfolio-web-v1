@@ -27,7 +27,7 @@ const education = [
       "Completed Higher Secondary education with a Science-Mathematics focus. Built foundation in programming and analytical thinking that led to pursuing Computer Science at the university level.",
     highlights: ["Science-Mathematics", "State Board", "Merit Recognition"],
     icon: GraduationCap,
-    color: "text-violet-400",
+    color: "text-violet-700",
     borderColor: "border-violet-400/30",
     dotColor: "bg-violet-400",
     lineColor: "bg-violet-400/20",
@@ -41,7 +41,7 @@ const education = [
       "Earned industry-recognized certifications to validate technical skills. OOP Fundamentals from NPTEL (IIT), IoT from DY Patil University, and JavaScript from HackerRank demonstrate commitment to continuous learning.",
     highlights: ["NPTEL (IIT)", "HackerRank", "IoT Certified"],
     icon: Award,
-    color: "text-emerald-400",
+    color: "text-emerald-700",
     borderColor: "border-emerald-400/30",
     dotColor: "bg-emerald-400",
     lineColor: "bg-emerald-400/20",
@@ -141,7 +141,7 @@ export default function EducationSection() {
                     {item.highlights.map((h) => (
                       <span
                         key={h}
-                        className={`px-2.5 py-1 rounded-md text-xs font-medium border ${item.borderColor} ${item.color} bg-cyber-dark/50`}
+                        className={`px-2.5 py-1 rounded-md text-xs font-medium border ${item.borderColor} ${item.color} bg-neon-blue/10`}
                       >
                         {h}
                       </span>
