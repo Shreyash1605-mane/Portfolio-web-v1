@@ -74,7 +74,7 @@ function RadarChart() {
           else ctx.lineTo(x, y);
         }
         ctx.closePath();
-        ctx.strokeStyle = "rgba(255, 155, 81, 0.1)";
+        ctx.strokeStyle = "rgba(59, 130, 246, 0.1)";
         ctx.lineWidth = 1;
         ctx.stroke();
       }
@@ -85,7 +85,7 @@ function RadarChart() {
         ctx.beginPath();
         ctx.moveTo(centerX, centerY);
         ctx.lineTo(centerX + radius * Math.cos(angle), centerY + radius * Math.sin(angle));
-        ctx.strokeStyle = "rgba(255, 155, 81, 0.08)";
+        ctx.strokeStyle = "rgba(59, 130, 246, 0.08)";
         ctx.lineWidth = 1;
         ctx.stroke();
       }
@@ -105,13 +105,13 @@ function RadarChart() {
 
       // Fill
       const gradient = ctx.createRadialGradient(centerX, centerY, 0, centerX, centerY, radius);
-      gradient.addColorStop(0, "rgba(255, 155, 81, 0.25)");
-      gradient.addColorStop(1, "rgba(255, 155, 81, 0.05)");
+      gradient.addColorStop(0, "rgba(59, 130, 246, 0.25)");
+      gradient.addColorStop(1, "rgba(59, 130, 246, 0.05)");
       ctx.fillStyle = gradient;
       ctx.fill();
 
       // Stroke
-      ctx.strokeStyle = "rgba(255, 155, 81, 0.7)";
+      ctx.strokeStyle = "rgba(59, 130, 246, 0.7)";
       ctx.lineWidth = 2;
       ctx.stroke();
 
@@ -124,7 +124,7 @@ function RadarChart() {
 
         ctx.beginPath();
         ctx.arc(x, y, 3, 0, Math.PI * 2);
-        ctx.fillStyle = "#FF9B51";
+        ctx.fillStyle = "#3b82f6";
         ctx.fill();
         ctx.strokeStyle = "var(--card, #FFFFFF)";
         ctx.lineWidth = 2;

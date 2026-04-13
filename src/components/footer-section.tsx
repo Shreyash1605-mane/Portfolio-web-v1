@@ -73,7 +73,7 @@ export default function FooterSection() {
           {/* CTA Banner with gradient border glow */}
           <div className="mb-14 p-8 sm:p-10 rounded-2xl bg-gradient-to-br from-neon-blue/10 via-neon-blue/5 to-neon-glow/10 border border-neon-blue/20 relative overflow-hidden elevated-card">
             {/* Animated background glow */}
-            <div className="absolute inset-0 opacity-40 bg-[radial-gradient(ellipse_at_center,_rgba(255,155,81,0.1)_0%,_transparent_70%)] pointer-events-none" />
+            <div className="absolute inset-0 opacity-40 bg-[radial-gradient(ellipse_at_center,_rgba(59,130,246,0.1)_0%,_transparent_70%)] pointer-events-none" />
             {/* Decorative floating dots */}
             <div className="absolute top-4 right-4 w-2 h-2 rounded-full bg-neon-blue/30 animate-pulse" />
             <div className="absolute bottom-6 left-8 w-1.5 h-1.5 rounded-full bg-neon-blue/20 animate-pulse" style={{ animationDelay: "0.5s" }} />

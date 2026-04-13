@@ -34,11 +34,11 @@ export default function WaveDivider({ variant = "normal", className = "" }: Wave
 
           {/* Accent gradient for the wave edge */}
           <linearGradient id={`wave-accent-${variant}`} x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="rgba(255,155,81,0)" />
-            <stop offset="30%" stopColor="rgba(255,155,81,0.15)" />
-            <stop offset="50%" stopColor="rgba(255,155,81,0.25)" />
-            <stop offset="70%" stopColor="rgba(255,155,81,0.15)" />
-            <stop offset="100%" stopColor="rgba(255,155,81,0)" />
+            <stop offset="0%" stopColor="rgba(59,130,246,0)" />
+            <stop offset="30%" stopColor="rgba(59,130,246,0.15)" />
+            <stop offset="50%" stopColor="rgba(59,130,246,0.25)" />
+            <stop offset="70%" stopColor="rgba(59,130,246,0.15)" />
+            <stop offset="100%" stopColor="rgba(59,130,246,0)" />
           </linearGradient>
         </defs>
 
@@ -110,7 +110,7 @@ export default function WaveDivider({ variant = "normal", className = "" }: Wave
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          style={{ stroke: "rgba(255,155,81,0.15)" }}
+          style={{ stroke: "rgba(59,130,246,0.15)" }}
         />
       </motion.svg>
     </div>

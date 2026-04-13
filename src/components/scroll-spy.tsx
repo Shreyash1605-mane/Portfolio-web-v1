@@ -107,7 +107,7 @@ export default function ScrollSpy() {
                   onMouseLeave={() => setHoveredSection(null)}
                   className={`rounded-full transition-all duration-300 ease-out ${
                     isActive
-                      ? "w-3 h-3 bg-neon-blue shadow-[0_0_8px_rgba(255,155,81,0.4)]"
+                      ? "w-3 h-3 bg-neon-blue shadow-[0_0_8px_rgba(59,130,246,0.4)]"
                       : "w-2 h-2 bg-cyber-border dark:bg-cyber-border hover:bg-neon-blue/50 hover:scale-125"
                   }`}
                   aria-label={`Navigate to ${section.label} section`}

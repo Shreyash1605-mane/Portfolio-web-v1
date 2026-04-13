@@ -100,7 +100,7 @@ export default function TestimonialsSection() {
                 {/* Person Info */}
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-neon-blue/15 flex items-center justify-center text-sm font-bold text-[#C2410C] shrink-0">
+                    <div className="w-10 h-10 rounded-full bg-neon-blue/15 flex items-center justify-center text-sm font-bold text-neon-blue shrink-0">
                       {testimonial.name.split(' ').map(n => n[0]).join('')}
                     </div>
                     <div>

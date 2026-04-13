@@ -300,7 +300,7 @@ export default function HeroSection() {
                 <div className="absolute inset-6 rounded-full border border-dashed border-neon-blue/10 animate-[spin_30s_linear_infinite_reverse]" />
 
                 {/* Neon glow container */}
-                <div className="absolute inset-4 rounded-full neon-glow overflow-hidden" style={{ boxShadow: '0 8px 40px rgba(255,155,81,0.2), 0 0 60px rgba(255,155,81,0.08)' }}>
+                <div className="absolute inset-4 rounded-full neon-glow overflow-hidden" style={{ boxShadow: '0 8px 40px rgba(59,130,246,0.2), 0 0 60px rgba(59,130,246,0.08)' }}>
                   <Image
                     src="/images/headshot.png"
                     alt="Shreyash Mane"
@@ -332,7 +332,7 @@ export default function HeroSection() {
               <motion.div
                 animate={{ y: [0, -8, 0] }}
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -top-4 -right-4 sm:top-0 sm:-right-8 px-3 py-1.5 bg-cyber-card border border-cyber-border rounded-lg text-xs font-mono text-[#C2410C] dark:text-amber-400 shadow-lg shadow-black/20"
+                className="absolute -top-4 -right-4 sm:top-0 sm:-right-8 px-3 py-1.5 bg-cyber-card border border-cyber-border rounded-lg text-xs font-mono text-neon-blue shadow-lg shadow-black/20"
               >
                 🔒 Cybersecurity
               </motion.div>
@@ -344,7 +344,7 @@ export default function HeroSection() {
                   ease: "easeInOut",
                   delay: 0.5,
                 }}
-                className="absolute -bottom-4 -left-4 sm:bottom-4 sm:-left-8 px-3 py-1.5 bg-cyber-card border border-cyber-border rounded-lg text-xs font-mono text-[#C2410C] dark:text-amber-400 shadow-lg shadow-black/20"
+                className="absolute -bottom-4 -left-4 sm:bottom-4 sm:-left-8 px-3 py-1.5 bg-cyber-card border border-cyber-border rounded-lg text-xs font-mono text-neon-blue shadow-lg shadow-black/20"
               >
                 📊 Data Science
               </motion.div>
@@ -356,7 +356,7 @@ export default function HeroSection() {
                   ease: "easeInOut",
                   delay: 1,
                 }}
-                className="absolute top-1/2 -right-8 sm:-right-12 px-3 py-1.5 bg-cyber-card border border-cyber-border rounded-lg text-xs font-mono text-[#C2410C] dark:text-amber-400 shadow-lg shadow-black/20"
+                className="absolute top-1/2 -right-8 sm:-right-12 px-3 py-1.5 bg-cyber-card border border-cyber-border rounded-lg text-xs font-mono text-neon-blue shadow-lg shadow-black/20"
               >
                 🏆 Silver Medalist
               </motion.div>
@@ -368,7 +368,7 @@ export default function HeroSection() {
                   ease: "easeInOut",
                   delay: 0.8,
                 }}
-                className="hidden sm:flex absolute -top-2 -left-8 sm:-left-12 px-3 py-1.5 bg-cyber-card border border-cyber-border rounded-lg text-xs font-mono text-[#C2410C] dark:text-amber-400 shadow-lg shadow-black/20"
+                className="hidden sm:flex absolute -top-2 -left-8 sm:-left-12 px-3 py-1.5 bg-cyber-card border border-cyber-border rounded-lg text-xs font-mono text-neon-blue shadow-lg shadow-black/20"
               >
                 🤖 IoT
               </motion.div>

@@ -21,10 +21,10 @@ export default function ParticleCanvas() {
   const initParticles = useCallback((width: number, height: number) => {
     const count = Math.min(Math.floor((width * height) / 15000), 80);
     const colors = [
-      "rgba(255, 155, 81,",  // orange accent
-      "rgba(255, 184, 120,", // lighter orange
-      "rgba(95, 111, 126,",  // silver-dim
-      "rgba(37, 52, 63,",    // dark text
+      "rgba(59, 130, 246,",  // blue accent
+      "rgba(96, 165, 250,",  // lighter blue
+      "rgba(148, 163, 184,", // silver-dim
+      "rgba(226, 232, 240,", // light text
     ];
     const particles: Particle[] = [];
     for (let i = 0; i < count; i++) {
@@ -123,7 +123,7 @@ export default function ParticleCanvas() {
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(255, 155, 81, ${opacity})`;
+            ctx.strokeStyle = `rgba(59, 130, 246, ${opacity})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
@@ -135,7 +135,7 @@ export default function ParticleCanvas() {
           ctx.beginPath();
           ctx.moveTo(p.x, p.y);
           ctx.lineTo(mouse.x, mouse.y);
-          ctx.strokeStyle = `rgba(255, 184, 120, ${opacity})`;
+          ctx.strokeStyle = `rgba(96, 165, 250, ${opacity})`;
           ctx.lineWidth = 0.5;
           ctx.stroke();
         }

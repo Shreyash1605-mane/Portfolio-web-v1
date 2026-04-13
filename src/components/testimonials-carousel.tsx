@@ -163,7 +163,7 @@ export default function TestimonialsCarousel() {
                       {/* Avatar with gradient ring */}
                       <div className="relative">
                         <div className="w-14 h-14 rounded-full bg-gradient-to-br from-neon-blue to-neon-glow p-[2px]">
-                          <div className="w-full h-full rounded-full bg-cyber-card flex items-center justify-center text-sm font-bold text-[#C2410C] dark:text-amber-400">
+                          <div className="w-full h-full rounded-full bg-cyber-card flex items-center justify-center text-sm font-bold text-neon-blue">
                             {testimonial.initials}
                           </div>
                         </div>
