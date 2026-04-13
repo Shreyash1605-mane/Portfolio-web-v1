@@ -2,8 +2,7 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, ArrowUp, Sun, Moon } from "lucide-react";
-import { useTheme } from "next-themes";
+import { Menu, X, ArrowUp } from "lucide-react";
 
 const navLinks = [
   { label: "Home", href: "#hero" },
@@ -14,59 +13,8 @@ const navLinks = [
   { label: "Experience", href: "#experience" },
   { label: "Certifications", href: "#certifications" },
   { label: "Skills", href: "#skills" },
-  { label: "Current", href: "#current-focus" },
-  { label: "Testimonials", href: "#testimonials" },
   { label: "Contact", href: "#contact" },
 ];
-
-function ThemeToggle() {
-  const { theme, setTheme, resolvedTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setTimeout(() => setMounted(true), 0);
-  }, []);
-
-  if (!mounted) {
-    return (
-      <div className="w-9 h-9 rounded-lg bg-neon-blue/10 animate-pulse" />
-    );
-  }
-
-  const isDark = resolvedTheme === "dark";
-
-  return (
-    <button
-      onClick={() => setTheme(isDark ? "light" : "dark")}
-      className="flex items-center justify-center w-9 h-9 rounded-lg hover:bg-neon-blue/10 text-silver-dim hover:text-neon-blue transition-all duration-300"
-      aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
-    >
-      <AnimatePresence mode="wait" initial={false}>
-        {isDark ? (
-          <motion.div
-            key="sun"
-            initial={{ rotate: -90, opacity: 0, scale: 0.5 }}
-            animate={{ rotate: 0, opacity: 1, scale: 1 }}
-            exit={{ rotate: 90, opacity: 0, scale: 0.5 }}
-            transition={{ duration: 0.3 }}
-          >
-            <Sun className="w-[18px] h-[18px]" />
-          </motion.div>
-        ) : (
-          <motion.div
-            key="moon"
-            initial={{ rotate: 90, opacity: 0, scale: 0.5 }}
-            animate={{ rotate: 0, opacity: 1, scale: 1 }}
-            exit={{ rotate: -90, opacity: 0, scale: 0.5 }}
-            transition={{ duration: 0.3 }}
-          >
-            <Moon className="w-[18px] h-[18px]" />
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </button>
-  );
-}
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -218,15 +166,11 @@ export default function Navbar() {
                   damping: 30,
                 }}
               />
-              {/* Theme Toggle (Desktop) */}
-              <div className="ml-2 pl-2 border-l border-cyber-border">
-                <ThemeToggle />
-              </div>
+
             </div>
 
-            {/* Mobile: Theme + Menu */}
-            <div className="flex items-center gap-2 lg:hidden">
-              <ThemeToggle />
+            {/* Mobile: Menu */}
+            <div className="flex items-center lg:hidden">
               <button
                 onClick={() => setMobileOpen(!mobileOpen)}
                 className="flex items-center justify-center w-10 h-10 rounded-lg hover:bg-neon-blue/10 text-silver-dim hover:text-neon-blue transition-all duration-300"

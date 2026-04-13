@@ -44,14 +44,14 @@
   /* Accent palette - electric blue (shared across themes) */
   --color-neon-blue: #3b82f6;
   --color-neon-glow: #60a5fa;
-  /* Light theme surfaces */
-  --color-cyber-dark: #EAEFEF;
-  --color-cyber-darker: #DCE3E7;
-  --color-cyber-card: #FFFFFF;
-  --color-cyber-border: #CDD5DC;
-  /* Light theme text */
-  --color-silver: #25343F;
-  --color-silver-dim: #5F6F7E;
+  /* Dark theme surfaces (dark-only mode) */
+  --color-cyber-dark: #0f172a;
+  --color-cyber-darker: #0c1425;
+  --color-cyber-card: #1e293b;
+  --color-cyber-border: #334155;
+  /* Dark theme text */
+  --color-silver: #E2E8F0;
+  --color-silver-dim: #94a3b8;
 }
 
 /* ========== LIGHT THEME ========== */

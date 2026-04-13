@@ -10,9 +10,7 @@ import MilestonesSection from "@/components/milestones-section";
 import ProjectsSection from "@/components/projects-section";
 import ExperienceSection from "@/components/experience-section";
 import SkillsSection from "@/components/skills-section";
-import CurrentFocusSection from "@/components/current-focus-section";
 import ContactSection from "@/components/contact-section";
-import TestimonialsCarousel from "@/components/testimonials-carousel";
 import CertificationsSection from "@/components/certifications-section";
 import FooterSection from "@/components/footer-section";
 import WaveDivider from "@/components/wave-divider";
@@ -43,10 +41,6 @@ export default function Home() {
         <CertificationsSection />
         <WaveDivider variant="inverted" />
         <SkillsSection />
-        <WaveDivider variant="inverted" />
-        <CurrentFocusSection />
-        <WaveDivider variant="normal" />
-        <TestimonialsCarousel />
         <WaveDivider variant="inverted" />
         <ContactSection />
       </main>

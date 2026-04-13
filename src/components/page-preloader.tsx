@@ -40,7 +40,7 @@ export default function PagePreloader() {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5, ease: "easeInOut" }}
-          className="fixed inset-0 z-[200] flex items-center justify-center bg-[var(--preloader-bg,#DCE3E7)]"
+          className="fixed inset-0 z-[200] flex items-center justify-center bg-[var(--preloader-bg,#0f172a)]"
         >
           {/* Subtle radial gradient background */}
           <div className="absolute inset-0 opacity-30">

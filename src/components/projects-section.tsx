@@ -510,10 +510,10 @@ export default function ProjectsSection() {
                           <a
                             href={proj.github}
                             onClick={(e) => e.stopPropagation()}
-                            className="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2.5 bg-neon-blue/10 hover:bg-neon-blue/20 text-neon-blue rounded-lg text-sm font-medium transition-all duration-300 border border-neon-blue/20 hover:border-neon-blue/40"
+                            className="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2.5 bg-neon-blue/10 hover:bg-neon-blue/20 text-neon-blue rounded-lg text-sm font-semibold transition-all duration-300 border border-neon-blue/20 hover:border-neon-blue/40 hover:shadow-lg hover:shadow-neon-blue/10"
                           >
                             <Github className="w-4 h-4" />
-                            GitHub
+                            View on GitHub
                           </a>
                           <button
                             onClick={(e) => {
