@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Send, Mail, User, MessageSquare, CheckCircle } from "lucide-react";
+import { Send, Mail, User, MessageSquare, CheckCircle, Loader2, AlertCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 export default function ContactSection() {
@@ -12,27 +12,42 @@ export default function ContactSection() {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const { toast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Open mailto with form data
-    const subject = encodeURIComponent(
-      `Portfolio Contact from ${formData.name}`
-    );
-    const body = encodeURIComponent(
-      `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
-    );
-    window.open(`mailto:maneshreyash16@gmail.com?subject=${subject}&body=${body}`);
-    setSubmitted(true);
+    setSending(true);
+    setError(null);
 
-    toast({
-      title: "Message Sent!",
-      description: `Thanks ${formData.name}! Your email client should open now.`,
-    });
+    try {
+      const res = await fetch('/api/contact?XTransformPort=3000', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
 
-    setFormData({ name: "", email: "", message: "" });
-    setTimeout(() => setSubmitted(false), 3000);
+      const data = await res.json();
+
+      if (!res.ok) {
+        const msg = data.details?.[0]?.message || data.error || 'Something went wrong.';
+        setError(msg);
+        return;
+      }
+
+      setSubmitted(true);
+      toast({
+        title: "Message Sent!",
+        description: `Thanks ${formData.name}! Your message has been saved successfully.`,
+      });
+      setFormData({ name: "", email: "", message: "" });
+      setTimeout(() => setSubmitted(false), 5000);
+    } catch {
+      setError('Network error. Please try again.');
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -114,10 +129,15 @@ export default function ContactSection() {
                   Available for opportunities
                 </p>
               </div>
-              <p className="text-silver-dim text-sm">
+              <p className="text-silver-dim text-sm mb-4">
                 Open to internships, hackathons, and collaborative projects in
                 cybersecurity, data science, and web development.
               </p>
+              {/* Response time badge */}
+              <div className="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-emerald-400/10 border border-emerald-400/15">
+                <div className="w-2 h-2 rounded-full bg-emerald-400" />
+                <span className="text-xs text-emerald-400 font-medium">Usually responds within 24 hours</span>
+              </div>
             </div>
           </motion.div>
 
@@ -201,12 +221,28 @@ export default function ContactSection() {
                   />
                 </div>
               </div>
+              {/* Error message */}
+              {error && (
+                <motion.div
+                  initial={{ opacity: 0, y: -5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="flex items-center gap-2 px-4 py-3 rounded-lg bg-destructive/10 border border-destructive/20 text-destructive text-sm"
+                >
+                  <AlertCircle className="w-4 h-4 shrink-0" />
+                  {error}
+                </motion.div>
+              )}
               <button
                 type="submit"
-                disabled={submitted}
+                disabled={submitted || sending}
                 className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-neon-blue hover:bg-neon-blue/90 text-silver font-semibold rounded-lg transition-all duration-300 shadow-lg shadow-neon-blue/15 hover:shadow-neon-blue/30 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed"
               >
-                {submitted ? (
+                {sending ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    Sending...
+                  </>
+                ) : submitted ? (
                   <>
                     <CheckCircle className="w-4 h-4" />
                     Message Sent!

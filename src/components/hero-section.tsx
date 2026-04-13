@@ -115,13 +115,16 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center particle-bg overflow-hidden scanline-overlay"
+      className="relative min-h-screen flex items-center particle-bg overflow-hidden scanline-overlay grain-overlay"
     >
       {/* Interactive Particle Canvas */}
       <ParticleCanvas />
 
       {/* Gradient overlays */}
       <div className="absolute inset-0 bg-gradient-to-b from-cyber-darker/60 via-transparent to-background pointer-events-none" />
+
+      {/* Morphing decorative blob */}
+      <div className="absolute top-20 right-[10%] w-[300px] h-[300px] bg-neon-blue/[0.04] morph-blob pointer-events-none blur-xl" />
 
       {/* Animated blobs for depth */}
       <div className="absolute top-10 -right-20 w-[500px] h-[500px] bg-neon-blue/[0.07] blob pointer-events-none blur-sm" />
@@ -201,7 +204,7 @@ export default function HeroSection() {
             >
               <button
                 onClick={handleDownloadResume}
-                className="group relative inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-neon-blue hover:bg-neon-blue/90 text-silver font-semibold rounded-lg transition-all duration-300 shadow-lg shadow-neon-blue/15 hover:shadow-neon-blue/30 hover:scale-[1.02] active:scale-[0.98] gradient-border"
+                className="group relative inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-neon-blue hover:bg-neon-blue/90 text-silver font-semibold rounded-lg transition-all duration-300 shadow-lg shadow-neon-blue/15 hover:shadow-neon-blue/30 hover:scale-[1.02] active:scale-[0.98] gradient-border cta-breathe"
               >
                 <Download className="w-4 h-4 transition-transform group-hover:-translate-y-0.5" />
                 Download Resume
