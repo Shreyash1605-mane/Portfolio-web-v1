@@ -259,7 +259,8 @@ export default function MilestonesSection() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="relative"
+                  className="relative stagger-fade-in-up"
+                  style={{ '--stagger-index': index } as React.CSSProperties}
                 >
                   {/* Step circle */}
                   <div className="absolute left-0 top-5 z-10 hidden md:flex items-center justify-center w-12 h-12 rounded-full bg-cyber-card border-2 border-neon-blue shadow-lg shadow-neon-blue/20">

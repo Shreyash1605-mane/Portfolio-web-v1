@@ -87,15 +87,15 @@ function TiltCard({
         y: -6,
         rotateX: 2,
         rotateY: -2,
-        scale: 1.02,
-        transition: { duration: 0.3 },
+        scale: 1.05,
+        transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
       }}
       style={{ perspective: 800 }}
     >
       <div
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
-        className={`relative h-full p-6 rounded-2xl border border-cyber-border bg-cyber-card/50 backdrop-blur-sm elevated-card card-shine soft-focus-ring spotlight-card ${className ?? ""}`}
+        className={`relative h-full p-6 rounded-2xl border border-cyber-border bg-cyber-card/50 backdrop-blur-sm elevated-card premium-card-hover soft-focus-ring spotlight-card ${className ?? ""}`}
       >
         {children}
       </div>
@@ -152,13 +152,16 @@ export default function WhatIDoSection() {
                 {item.description}
               </p>
 
-              {/* Decorative corner line */}
+              {/* Decorative corner brackets - top-right & bottom-left (original) */}
               <div
                 className={`absolute top-0 right-0 w-12 h-12 border-t-2 border-r-2 ${item.borderColor} rounded-tr-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
               />
               <div
                 className={`absolute bottom-0 left-0 w-12 h-12 border-b-2 border-l-2 ${item.borderColor} rounded-bl-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
               />
+              {/* Premium corner brackets - top-left & bottom-right (enhancement) */}
+              <div className="corner-bracket-tl" />
+              <div className="corner-bracket-br" />
             </TiltCard>
           ))}
         </div>

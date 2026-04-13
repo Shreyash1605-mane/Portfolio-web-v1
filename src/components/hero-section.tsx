@@ -104,18 +104,70 @@ function TypingText({ words, delay = 0 }: { words: string[]; delay?: number }) {
 
 export default function HeroSection() {
   const { toast } = useToast();
+  const heroRef = useRef<HTMLDivElement>(null);
 
-  const handleDownloadResume = () => {
-    toast({
-      title: "Resume Download",
-      description: "Resume will be available soon! Stay tuned.",
-    });
+  // Mouse tracking for hero spotlight
+  useEffect(() => {
+    const section = heroRef.current;
+    if (!section) return;
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = section.getBoundingClientRect();
+      section.style.setProperty("--mouse-x", `${e.clientX - rect.left}px`);
+      section.style.setProperty("--mouse-y", `${e.clientY - rect.top}px`);
+    };
+    section.addEventListener("mousemove", handleMouseMove, { passive: true });
+    return () => section.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
+  const [downloading, setDownloading] = useState(false);
+
+  const handleDownloadResume = async () => {
+    setDownloading(true);
+    try {
+      const response = await fetch("/api/resume");
+      if (!response.ok) throw new Error("Failed to generate resume");
+
+      const htmlBlob = await response.blob();
+      const blobUrl = window.URL.createObjectURL(htmlBlob);
+
+      const printWindow = window.open(blobUrl, "_blank");
+      if (printWindow) {
+        printWindow.addEventListener("load", () => {
+          setTimeout(() => {
+            printWindow.print();
+            window.URL.revokeObjectURL(blobUrl);
+          }, 250);
+        });
+      } else {
+        // Fallback: download the HTML file directly
+        const link = document.createElement("a");
+        link.href = blobUrl;
+        link.download = "Shreyash_Mane_Resume.html";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(blobUrl);
+      }
+
+      toast({
+        title: "Resume Ready!",
+        description: "Use Ctrl+P / \u2318+P in the new tab to save as PDF.",
+      });
+    } catch {
+      toast({
+        title: "Download Failed",
+        description: "Could not generate resume. Please try again.",
+      });
+    } finally {
+      setDownloading(false);
+    }
   };
 
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center particle-bg overflow-hidden scanline-overlay grain-overlay mesh-gradient-bg"
+      ref={heroRef}
+      className="relative min-h-screen flex items-center particle-bg overflow-hidden scanline-overlay grain-overlay mesh-gradient-bg hero-spotlight"
     >
       {/* Interactive Particle Canvas */}
       <ParticleCanvas />
@@ -130,6 +182,24 @@ export default function HeroSection() {
       <div className="absolute top-10 -right-20 w-[500px] h-[500px] bg-neon-blue/[0.07] blob pointer-events-none blur-sm" />
       <div className="absolute -bottom-20 -left-10 w-[400px] h-[400px] bg-neon-glow/[0.06] blob blob-delay-1 pointer-events-none blur-sm" />
       <div className="absolute top-1/2 left-1/3 w-[300px] h-[300px] bg-neon-blue/[0.04] blob blob-delay-2 pointer-events-none blur-sm" />
+
+      {/* Starfield sparkle effect */}
+      <div className="starfield">
+        {Array.from({ length: 30 }).map((_, i) => (
+          <div
+            key={i}
+            className="star"
+            style={{
+              left: `${(i * 37 + 13) % 100}%`,
+              top: `${(i * 53 + 7) % 100}%`,
+              ['--twinkle-duration' as string]: `${2.5 + (i % 5) * 0.8}s`,
+              ['--twinkle-delay' as string]: `${(i % 8) * 0.5}s`,
+              width: `${1 + (i % 3)}px`,
+              height: `${1 + (i % 3)}px`,
+            }}
+          />
+        ))}
+      </div>
 
       {/* Animated grid lines */}
       <div className="absolute inset-0 grid-bg pointer-events-none opacity-50" />
@@ -204,10 +274,18 @@ export default function HeroSection() {
             >
               <button
                 onClick={handleDownloadResume}
-                className="group relative inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-neon-blue hover:bg-neon-blue/90 text-silver font-semibold rounded-lg transition-all duration-300 shadow-lg shadow-neon-blue/15 hover:shadow-neon-blue/30 hover:scale-[1.02] active:scale-[0.98] gradient-border cta-breathe"
+                disabled={downloading}
+                className="group relative inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-neon-blue hover:bg-neon-blue/90 text-silver font-semibold rounded-lg transition-all duration-300 shadow-lg shadow-neon-blue/15 hover:shadow-neon-blue/30 hover:scale-[1.02] active:scale-[0.98] gradient-border cta-breathe disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
               >
-                <Download className="w-4 h-4 transition-transform group-hover:-translate-y-0.5" />
-                Download Resume
+                {downloading ? (
+                  <svg className="w-4 h-4 animate-spin" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                  </svg>
+                ) : (
+                  <Download className="w-4 h-4 transition-transform group-hover:-translate-y-0.5" />
+                )}
+                {downloading ? "Generating..." : "Download Resume"}
               </button>
               <a
                 href="#projects"
@@ -299,6 +377,12 @@ export default function HeroSection() {
                 {/* Inner dashed ring */}
                 <div className="absolute inset-6 rounded-full border border-dashed border-neon-blue/10 animate-[spin_30s_linear_infinite_reverse]" />
 
+                {/* Enhanced animated dashed rings at different speeds */}
+                <div className="hero-ring hero-ring-1" />
+                <div className="hero-ring hero-ring-2" />
+                <div className="hero-ring hero-ring-3" />
+                <div className="hero-ring hero-ring-dotted" />
+
                 {/* Neon glow container */}
                 <div className="absolute inset-4 rounded-full neon-glow overflow-hidden" style={{ boxShadow: '0 8px 40px rgba(59,130,246,0.2), 0 0 60px rgba(59,130,246,0.08)' }}>
                   <Image
@@ -332,7 +416,7 @@ export default function HeroSection() {
               <motion.div
                 animate={{ y: [0, -8, 0] }}
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -top-4 -right-4 sm:top-0 sm:-right-8 px-3 py-1.5 bg-cyber-card border border-cyber-border rounded-lg text-xs font-mono text-neon-blue shadow-lg shadow-black/20"
+                className="absolute -top-4 -right-4 sm:top-0 sm:-right-8 px-3 py-1.5 bg-cyber-card border border-cyber-border rounded-lg text-xs font-mono text-neon-blue shadow-lg shadow-black/20 tech-badge-glass"
               >
                 🔒 Cybersecurity
               </motion.div>
@@ -344,7 +428,7 @@ export default function HeroSection() {
                   ease: "easeInOut",
                   delay: 0.5,
                 }}
-                className="absolute -bottom-4 -left-4 sm:bottom-4 sm:-left-8 px-3 py-1.5 bg-cyber-card border border-cyber-border rounded-lg text-xs font-mono text-neon-blue shadow-lg shadow-black/20"
+                className="absolute -bottom-4 -left-4 sm:bottom-4 sm:-left-8 px-3 py-1.5 bg-cyber-card border border-cyber-border rounded-lg text-xs font-mono text-neon-blue shadow-lg shadow-black/20 tech-badge-glass"
               >
                 📊 Data Science
               </motion.div>
@@ -356,7 +440,7 @@ export default function HeroSection() {
                   ease: "easeInOut",
                   delay: 1,
                 }}
-                className="absolute top-1/2 -right-8 sm:-right-12 px-3 py-1.5 bg-cyber-card border border-cyber-border rounded-lg text-xs font-mono text-neon-blue shadow-lg shadow-black/20"
+                className="absolute top-1/2 -right-8 sm:-right-12 px-3 py-1.5 bg-cyber-card border border-cyber-border rounded-lg text-xs font-mono text-neon-blue shadow-lg shadow-black/20 tech-badge-glass"
               >
                 🏆 Silver Medalist
               </motion.div>
@@ -368,7 +452,7 @@ export default function HeroSection() {
                   ease: "easeInOut",
                   delay: 0.8,
                 }}
-                className="hidden sm:flex absolute -top-2 -left-8 sm:-left-12 px-3 py-1.5 bg-cyber-card border border-cyber-border rounded-lg text-xs font-mono text-neon-blue shadow-lg shadow-black/20"
+                className="hidden sm:flex absolute -top-2 -left-8 sm:-left-12 px-3 py-1.5 bg-cyber-card border border-cyber-border rounded-lg text-xs font-mono text-neon-blue shadow-lg shadow-black/20 tech-badge-glass"
               >
                 🤖 IoT
               </motion.div>

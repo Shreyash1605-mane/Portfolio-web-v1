@@ -402,6 +402,7 @@ export default function SkillsSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: catIndex * 0.15 }}
               className={`border border-cyber-border rounded-2xl bg-cyber-card/50 backdrop-blur-sm p-6 elevated-card soft-focus-ring group ${category.borderColor}`}
+              style={{ '--stagger-index': catIndex } as React.CSSProperties}
             >
               {/* Category Header */}
               <div className="flex items-center gap-3 mb-6 pb-4 border-b border-cyber-border">
@@ -447,10 +448,11 @@ export default function SkillsSection() {
               "Linux",
               "Postman",
               "Jupyter Notebook",
-            ].map((tool) => (
+            ].map((tool, i) => (
               <span
                 key={tool}
-                className="inline-flex items-center gap-1.5 px-4 py-2 bg-cyber-card border border-cyber-border rounded-full text-sm text-foreground/70 hover:text-neon-blue hover:border-neon-blue/30 hover:bg-neon-blue/5 hover:shadow-lg hover:shadow-neon-blue/10 transition-all duration-300 cursor-default"
+                className="inline-flex items-center gap-1.5 px-4 py-2 bg-cyber-card border border-cyber-border rounded-full text-sm text-foreground/70 hover:text-neon-blue hover:border-neon-blue/30 hover:bg-neon-blue/5 hover:shadow-lg hover:shadow-neon-blue/10 transition-all duration-300 cursor-default stagger-fade-in-up"
+                style={{ '--stagger-index': i } as React.CSSProperties}
               >
                 <span className="text-base">{toolEmojis[tool] ?? "⚙️"}</span>
                 {tool}

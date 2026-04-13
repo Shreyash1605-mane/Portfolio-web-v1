@@ -10,6 +10,8 @@ import {
   Lightbulb,
   Rocket,
   Heart,
+  GitCommit,
+  Bug,
 } from "lucide-react";
 import { useMemo } from "react";
 
@@ -47,6 +49,134 @@ const currentActivities = [
     bgColor: "bg-sky-500/10",
   },
 ];
+
+const activityFeed = [
+  {
+    id: 1,
+    icon: GitCommit,
+    description: "Pushed 3 commits to smart-parking",
+    timestamp: "2 hours ago",
+    color: "text-emerald-500",
+    bgColor: "bg-emerald-500/10",
+  },
+  {
+    id: 2,
+    icon: Bug,
+    description: "Fixed bug in authentication flow",
+    timestamp: "5 hours ago",
+    color: "text-amber-500",
+    bgColor: "bg-amber-500/10",
+  },
+  {
+    id: 3,
+    icon: Code,
+    description: "Refactored ML pipeline for better accuracy",
+    timestamp: "Yesterday",
+    color: "text-neon-blue",
+    bgColor: "bg-neon-blue/10",
+  },
+  {
+    id: 4,
+    icon: Coffee,
+    description: "Learning Rust fundamentals",
+    timestamp: "Yesterday",
+    color: "text-amber-600 dark:text-amber-400",
+    bgColor: "bg-amber-500/10",
+  },
+  {
+    id: 5,
+    icon: Rocket,
+    description: "Deployed e-grampanchayat portal v2.0",
+    timestamp: "3 days ago",
+    color: "text-violet-500",
+    bgColor: "bg-violet-500/10",
+  },
+  {
+    id: 6,
+    icon: GitCommit,
+    description: "Merged PR #12: Added dark mode support",
+    timestamp: "3 days ago",
+    color: "text-emerald-500",
+    bgColor: "bg-emerald-500/10",
+  },
+  {
+    id: 7,
+    icon: Code,
+    description: "Wrote unit tests for disease prediction model",
+    timestamp: "5 days ago",
+    color: "text-neon-blue",
+    bgColor: "bg-neon-blue/10",
+  },
+];
+
+function ActivityTimeline() {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.6, delay: 0.15 }}
+      className="w-full"
+    >
+      <div className="relative p-5 sm:p-6 rounded-xl border border-cyber-border bg-cyber-card/50 backdrop-blur-sm elevated-card overflow-hidden">
+        {/* Header with online indicator */}
+        <div className="flex items-center gap-3 mb-5">
+          <div className="relative flex items-center justify-center w-3 h-3">
+            <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-400 animate-ping opacity-50" />
+            <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500" />
+          </div>
+          <p className="font-mono text-xs tracking-wider text-emerald-500 uppercase">
+            Online now
+          </p>
+          <span className="text-silver-dim/40 text-xs">·</span>
+          <p className="font-mono text-xs tracking-wider text-neon-blue/70 uppercase">
+            Recent Activity
+          </p>
+        </div>
+
+        {/* Timeline entries */}
+        <div className="relative">
+          {activityFeed.map((activity, index) => (
+            <motion.div
+              key={activity.id}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{
+                duration: 0.4,
+                delay: index * 0.08,
+                ease: "easeOut",
+              }}
+              className="relative flex items-start gap-3 group"
+            >
+              {/* Timeline connector line */}
+              {index < activityFeed.length - 1 && (
+                <div className="absolute left-[15px] top-[32px] w-px h-[calc(100%_-_12px)] bg-gradient-to-b from-cyber-border/60 to-transparent" />
+              )}
+
+              {/* Icon dot */}
+              <div
+                className={`relative z-10 flex items-center justify-center w-[30px] h-[30px] rounded-full ${activity.bgColor} shrink-0 transition-transform duration-300 group-hover:scale-110`}
+              >
+                <activity.icon className={`w-3.5 h-3.5 ${activity.color}`} />
+              </div>
+
+              {/* Content */}
+              <div className="flex-1 min-w-0 pb-5 last:pb-0">
+                <p className="text-sm text-silver leading-relaxed">
+                  {activity.description}
+                </p>
+                <p className="text-xs text-silver-dim/60 mt-0.5 font-mono">
+                  {activity.timestamp}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </motion.div>
+  );
+}
 
 const funFacts = [
   { icon: Coffee, label: "Cups of Coffee", value: "∞" },
@@ -318,6 +448,11 @@ export default function CurrentFocusSection() {
               </div>
             </motion.div>
           ))}
+        </div>
+
+        {/* Activity Timeline */}
+        <div className="max-w-4xl mx-auto mb-12">
+          <ActivityTimeline />
         </div>
 
         {/* Contribution Heatmap */}
