@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Download, ArrowDown } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState, useRef } from "react";
+import ParticleCanvas from "@/components/particle-canvas";
 
 const roles = [
   "Cybersecurity",
@@ -105,6 +106,9 @@ export default function HeroSection() {
       id="hero"
       className="relative min-h-screen flex items-center particle-bg overflow-hidden scanline-overlay"
     >
+      {/* Interactive Particle Canvas */}
+      <ParticleCanvas />
+
       {/* Gradient overlays */}
       <div className="absolute inset-0 bg-gradient-to-b from-cyber-darker/60 via-transparent to-background pointer-events-none" />
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-neon-blue/5 rounded-full blur-[120px] pointer-events-none" />

@@ -8,6 +8,7 @@ import { useCallback } from "react";
 const navLinks = [
   { label: "Home", href: "#hero" },
   { label: "About", href: "#what-i-do" },
+  { label: "Education", href: "#education" },
   { label: "Milestones", href: "#milestones" },
   { label: "Projects", href: "#projects" },
   { label: "Experience", href: "#experience" },

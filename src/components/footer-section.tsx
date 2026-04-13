@@ -75,7 +75,7 @@ export default function FooterSection() {
 
           {/* Nav links */}
           <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 mb-6">
-            {["Home", "About", "Milestones", "Projects", "Experience", "Skills", "Contact"].map(
+            {["Home", "About", "Education", "Milestones", "Projects", "Experience", "Skills", "Contact"].map(
               (item) => (
                 <a
                   key={item}
