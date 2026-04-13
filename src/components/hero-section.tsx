@@ -214,6 +214,29 @@ export default function HeroSection() {
               </a>
             </motion.div>
 
+            {/* Social Proof Row */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.85, duration: 0.5 }}
+              className="flex flex-wrap gap-3 justify-center lg:justify-start mt-8 mb-8"
+            >
+              {[
+                { label: "🥇 Silver Medalist", icon: "🏆" },
+                { label: "💻 CS Student", icon: "🎓" },
+                { label: "🔓 Cybersecurity", icon: "🛡️" },
+                { label: "📊 Data Science", icon: "📈" },
+                { label: "🌐 Full Stack", icon: "⚡" },
+              ].map((item) => (
+                <span
+                  key={item.label}
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium bg-cyber-card border border-cyber-border text-silver-dim hover:text-neon-blue hover:border-neon-blue/30 transition-all duration-300 cursor-default"
+                >
+                  {item.icon} {item.label}
+                </span>
+              ))}
+            </motion.div>
+
             {/* Quick stats with animated counters */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
