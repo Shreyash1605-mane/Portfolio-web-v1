@@ -1,5 +1,6 @@
 "use client";
 
+import { useCallback } from "react";
 import { motion } from "framer-motion";
 import { ShieldCheck, Database, Cpu, Globe } from "lucide-react";
 
@@ -46,7 +47,35 @@ const specialties = [
   },
 ];
 
-function TiltCard({ children, index }: { children: React.ReactNode; index: number }) {
+function TiltCard({
+  children,
+  index,
+  className,
+}: {
+  children: React.ReactNode;
+  index: number;
+  className?: string;
+}) {
+  const handleMouseMove = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      const rect = e.currentTarget.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      e.currentTarget.style.setProperty("--mouse-x", `${x}px`);
+      e.currentTarget.style.setProperty("--mouse-y", `${y}px`);
+    },
+    []
+  );
+
+  const handleMouseLeave = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      const rect = e.currentTarget.getBoundingClientRect();
+      e.currentTarget.style.setProperty("--mouse-x", `${rect.width / 2}px`);
+      e.currentTarget.style.setProperty("--mouse-y", `${rect.height / 2}px`);
+    },
+    []
+  );
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
@@ -64,7 +93,9 @@ function TiltCard({ children, index }: { children: React.ReactNode; index: numbe
       style={{ perspective: 800 }}
     >
       <div
-        className="relative h-full p-6 rounded-2xl border border-cyber-border bg-cyber-card/50 backdrop-blur-sm elevated-card card-shine soft-focus-ring"
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        className={`relative h-full p-6 rounded-2xl border border-cyber-border bg-cyber-card/50 backdrop-blur-sm elevated-card card-shine soft-focus-ring spotlight-card ${className ?? ""}`}
       >
         {children}
       </div>

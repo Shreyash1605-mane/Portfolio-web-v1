@@ -1,6 +1,6 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
 
 const skillData = [
@@ -18,12 +18,25 @@ const skillData = [
   { name: "ML", level: 75, category: "Domain" },
 ];
 
+function getProficiencyLabel(level: number): string {
+  if (level >= 95) return "Expert";
+  if (level >= 85) return "Advanced";
+  if (level >= 70) return "Intermediate";
+  return "Beginner";
+}
+
+function getProficiencyColor(level: number): string {
+  if (level >= 95) return "text-emerald-600 dark:text-emerald-400";
+  if (level >= 85) return "text-neon-blue";
+  if (level >= 70) return "text-amber-600 dark:text-amber-400";
+  return "text-silver-dim";
+}
+
 function RadarChart() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [animated, setAnimated] = useState(false);
-  const [animProgress, setAnimProgress] = useState(0);
-  const progressRef = useRef(0);
   const animRef = useRef<number>(0);
+  const progressRef = useRef(0);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -180,6 +193,7 @@ const skillCategories = [
   {
     title: "Programming Languages",
     icon: "💻",
+    borderColor: "border-t-2 border-t-cyan-500/40",
     skills: [
       { name: "Java", level: 90 },
       { name: "Python", level: 85 },
@@ -190,6 +204,7 @@ const skillCategories = [
   {
     title: "Web & Database",
     icon: "🌐",
+    borderColor: "border-t-2 border-t-emerald-500/40",
     skills: [
       { name: "HTML", level: 95 },
       { name: "CSS", level: 90 },
@@ -200,6 +215,7 @@ const skillCategories = [
   {
     title: "Specialized Domains",
     icon: "🎯",
+    borderColor: "border-t-2 border-t-amber-500/40",
     skills: [
       { name: "Cybersecurity", level: 85 },
       { name: "Data Science", level: 80 },
@@ -210,13 +226,19 @@ const skillCategories = [
 ];
 
 function SkillBar({ name, level, delay }: { name: string; level: number; delay: number }) {
+  const [hovered, setHovered] = useState(false);
+  const label = getProficiencyLabel(level);
+  const labelColor = getProficiencyColor(level);
+
   return (
     <motion.div
       initial={{ opacity: 0, x: -20 }}
       whileInView={{ opacity: 1, x: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay }}
-      className="group"
+      className="group relative"
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
     >
       <div className="flex justify-between items-center mb-1.5">
         <span className="text-sm font-medium text-silver group-hover:text-neon-blue transition-colors duration-300">
@@ -224,7 +246,7 @@ function SkillBar({ name, level, delay }: { name: string; level: number; delay: 
         </span>
         <span className="text-xs font-mono text-silver-dim tabular-nums">{level}%</span>
       </div>
-      <div className="h-2.5 bg-cyber-border/50 rounded-full overflow-hidden">
+      <div className="h-2.5 bg-cyber-border/50 rounded-full overflow-hidden relative">
         <motion.div
           initial={{ width: 0 }}
           whileInView={{ width: `${level}%` }}
@@ -242,9 +264,46 @@ function SkillBar({ name, level, delay }: { name: string; level: number; delay: 
           />
         </motion.div>
       </div>
+
+      {/* Hover tooltip */}
+      <AnimatePresence>
+        {hovered && (
+          <motion.div
+            initial={{ opacity: 0, y: 4, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 4, scale: 0.95 }}
+            transition={{ duration: 0.15 }}
+            className="absolute -top-10 left-1/2 -translate-x-1/2 z-20 px-3 py-1.5 bg-silver text-cyber-card rounded-lg text-xs font-medium shadow-lg pointer-events-none whitespace-nowrap"
+          >
+            <span className="font-bold">{level}%</span>
+            <span className="mx-1.5 text-cyber-card/60">·</span>
+            <span className={labelColor.replace("text-", "text-cyber-card/80")}>{label}</span>
+            {/* Callout arrow */}
+            <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-silver rotate-45" />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* Proficiency label */}
+      <div className="mt-1">
+        <span className={`text-[10px] font-medium ${labelColor} opacity-70`}>
+          {label}
+        </span>
+      </div>
     </motion.div>
   );
 }
+
+const toolEmojis: Record<string, string> = {
+  "Git & GitHub": "🔀",
+  "VS Code": "📝",
+  "Arduino IDE": "🔌",
+  "Google Colab": "🧪",
+  "Figma": "🎨",
+  "Linux": "🐧",
+  "Postman": "📬",
+  "Jupyter Notebook": "📓",
+};
 
 export default function SkillsSection() {
   return (
@@ -342,7 +401,7 @@ export default function SkillsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: catIndex * 0.15 }}
-              className="border border-cyber-border rounded-2xl bg-cyber-card/50 backdrop-blur-sm p-6 elevated-card soft-focus-ring group"
+              className={`border border-cyber-border rounded-2xl bg-cyber-card/50 backdrop-blur-sm p-6 elevated-card soft-focus-ring group ${category.borderColor}`}
             >
               {/* Category Header */}
               <div className="flex items-center gap-3 mb-6 pb-4 border-b border-cyber-border">
@@ -391,8 +450,9 @@ export default function SkillsSection() {
             ].map((tool) => (
               <span
                 key={tool}
-                className="px-4 py-2 bg-cyber-card border border-cyber-border rounded-full text-sm text-foreground/70 hover:text-neon-blue hover:border-neon-blue/30 hover:bg-neon-blue/5 transition-all duration-300 cursor-default"
+                className="inline-flex items-center gap-1.5 px-4 py-2 bg-cyber-card border border-cyber-border rounded-full text-sm text-foreground/70 hover:text-neon-blue hover:border-neon-blue/30 hover:bg-neon-blue/5 hover:shadow-lg hover:shadow-neon-blue/10 transition-all duration-300 cursor-default"
               >
+                <span className="text-base">{toolEmojis[tool] ?? "⚙️"}</span>
                 {tool}
               </span>
             ))}

@@ -1,9 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowUp, Sun, Moon } from "lucide-react";
-import { useCallback } from "react";
 import { useTheme } from "next-themes";
 
 const navLinks = [
@@ -74,6 +73,9 @@ export default function Navbar() {
   const [activeSection, setActiveSection] = useState("hero");
   const [scrollProgress, setScrollProgress] = useState(0);
   const [showBackToTop, setShowBackToTop] = useState(false);
+  const [indicatorPos, setIndicatorPos] = useState({ left: 0, width: 0 });
+  const navContainerRef = useRef<HTMLDivElement>(null);
+  const linkRefs = useRef<Map<string, HTMLAnchorElement>>(new Map());
 
   useEffect(() => {
     const handleScroll = () => {
@@ -101,6 +103,20 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Update animated indicator position when activeSection changes
+  useEffect(() => {
+    const activeHref = `#${activeSection}`;
+    const activeLinkEl = linkRefs.current.get(activeHref);
+    if (activeLinkEl && navContainerRef.current) {
+      const containerRect = navContainerRef.current.getBoundingClientRect();
+      const linkRect = activeLinkEl.getBoundingClientRect();
+      setIndicatorPos({
+        left: linkRect.left - containerRect.left,
+        width: linkRect.width,
+      });
+    }
+  }, [activeSection]);
 
   const handleNavClick = useCallback((href: string) => {
     setMobileOpen(false);
@@ -130,7 +146,7 @@ export default function Navbar() {
         transition={{ duration: 0.5, ease: "easeOut" }}
         className={`fixed top-[3px] left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
-            ? "bg-cyber-darker/90 backdrop-blur-xl border-b border-cyber-border shadow-lg shadow-black/[0.06]"
+            ? "bg-[var(--bg-surface-soft)] backdrop-blur-2xl border-b border-cyber-border shadow-lg shadow-black/[0.06]"
             : "bg-transparent"
         }`}
       >
@@ -151,28 +167,49 @@ export default function Navbar() {
             </a>
 
             {/* Desktop Nav */}
-            <div className="hidden lg:flex items-center gap-0.5">
+            <div
+              ref={navContainerRef}
+              className="hidden lg:flex items-center gap-0.5 relative"
+            >
               {navLinks.map((link) => {
                 const isActive =
                   activeSection === link.href.slice(1);
                 return (
                   <a
                     key={link.label}
+                    ref={(el) => {
+                      if (el) {
+                        linkRefs.current.set(link.href, el);
+                      }
+                    }}
                     href={link.href}
                     onClick={(e) => {
                       e.preventDefault();
                       handleNavClick(link.href);
                     }}
-                    className={`px-3 py-2 text-sm font-medium rounded-lg transition-all duration-300 ${
+                    className={`relative px-3 py-2 text-sm font-medium rounded-lg transition-all duration-300 ${
                       isActive
-                        ? "text-neon-blue bg-neon-blue/10"
-                        : "text-silver-dim hover:text-neon-blue hover:bg-neon-blue/5"
+                        ? "text-neon-blue"
+                        : "text-silver-dim hover:text-neon-blue"
                     }`}
                   >
                     {link.label}
                   </a>
                 );
               })}
+              {/* Animated underline indicator */}
+              <motion.div
+                className="absolute bottom-0 h-[2px] bg-neon-blue rounded-full"
+                animate={{
+                  left: indicatorPos.left,
+                  width: indicatorPos.width,
+                }}
+                transition={{
+                  type: "spring",
+                  stiffness: 350,
+                  damping: 30,
+                }}
+              />
               {/* Theme Toggle (Desktop) */}
               <div className="ml-2 pl-2 border-l border-cyber-border">
                 <ThemeToggle />

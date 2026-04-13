@@ -10,10 +10,29 @@ import {
   Layers,
   Zap,
   Filter,
+  CheckCircle2,
+  Clock,
 } from "lucide-react";
 import Image from "next/image";
 
-const projects = [
+type ProjectStatus = "completed" | "in-progress";
+
+interface Project {
+  id: number;
+  title: string;
+  image: string;
+  tags: string[];
+  category: string;
+  filterCategory: string;
+  status: ProjectStatus;
+  description: string;
+  techDetails: string;
+  features: string[];
+  impact: string;
+  github: string;
+}
+
+const projects: Project[] = [
   {
     id: 1,
     title: "Smart Parking System",
@@ -21,6 +40,7 @@ const projects = [
     tags: ["Arduino", "ESP32", "IoT", "IR Sensors"],
     category: "IoT & Embedded",
     filterCategory: "iot",
+    status: "completed",
     description:
       "Real-time parking slot monitoring system using Arduino/ESP32 microcontroller with IR sensor integration for live slot availability updates.",
     techDetails:
@@ -41,6 +61,7 @@ const projects = [
     tags: ["HTML", "JavaScript", "MySQL", "Web Dev"],
     category: "Web Development",
     filterCategory: "web",
+    status: "completed",
     description:
       "Digital governance dashboard for streamlining village record management and administrative processes.",
     techDetails:
@@ -61,6 +82,7 @@ const projects = [
     tags: ["Python", "Scikit-learn", "Pandas", "ML"],
     category: "Machine Learning",
     filterCategory: "ml",
+    status: "in-progress",
     description:
       "Supervised learning models for predicting diseases based on patient symptoms and medical history data.",
     techDetails:
@@ -82,6 +104,26 @@ const filterCategories = [
   { key: "web", label: "Web Dev" },
   { key: "ml", label: "ML / AI" },
 ];
+
+function StatusBadge({ status }: { status: ProjectStatus }) {
+  const isCompleted = status === "completed";
+  return (
+    <div
+      className={`absolute top-3 right-3 inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-semibold border backdrop-blur-sm ${
+        isCompleted
+          ? "bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 border-emerald-500/20"
+          : "bg-amber-500/15 text-amber-700 dark:text-amber-400 border-amber-500/20"
+      }`}
+    >
+      {isCompleted ? (
+        <CheckCircle2 className="w-3 h-3" />
+      ) : (
+        <Clock className="w-3 h-3" />
+      )}
+      {isCompleted ? "Completed" : "In Progress"}
+    </div>
+  );
+}
 
 export default function ProjectsSection() {
   const [flippedCards, setFlippedCards] = useState<Set<number>>(new Set());
@@ -203,6 +245,8 @@ export default function ProjectsSection() {
                         <div className="absolute top-3 left-3 px-2.5 py-1 bg-cyber-darker/80 backdrop-blur-sm rounded-md text-xs font-mono text-neon-blue border border-neon-blue/20">
                           {proj.category}
                         </div>
+                        {/* Status badge */}
+                        <StatusBadge status={proj.status} />
                         {/* Tap hint on mobile */}
                         <div className="absolute bottom-3 right-3 sm:hidden px-2 py-1 bg-black/50 backdrop-blur-sm rounded-md text-[10px] text-white/80 font-mono">
                           Tap to flip
@@ -335,8 +379,11 @@ export default function ProjectsSection() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-cyber-card via-transparent to-transparent" />
                 <div className="absolute bottom-4 left-6 right-6">
-                  <div className="px-3 py-1 bg-neon-blue/20 border border-neon-blue/30 rounded-md text-xs font-mono text-neon-blue inline-block mb-2">
-                    {project.category}
+                  <div className="flex items-center gap-2 mb-2">
+                    <div className="px-3 py-1 bg-neon-blue/20 border border-neon-blue/30 rounded-md text-xs font-mono text-neon-blue inline-block">
+                      {project.category}
+                    </div>
+                    <StatusBadge status={project.status} />
                   </div>
                   <h3 className="text-2xl font-bold text-silver">
                     {project.title}
