@@ -2,12 +2,10 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useTheme } from "next-themes";
 
 export default function PagePreloader() {
   const [loading, setLoading] = useState(true);
   const [progress, setProgress] = useState(0);
-  const { resolvedTheme } = useTheme();
 
   useEffect(() => {
     // Simulate loading progress
@@ -42,8 +40,7 @@ export default function PagePreloader() {
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5, ease: "easeInOut" }}
-          className="fixed inset-0 z-[200] flex items-center justify-center"
-          style={{ backgroundColor: resolvedTheme === "dark" ? "#0B1120" : "#DCE3E7" }}
+          className="fixed inset-0 z-[200] flex items-center justify-center bg-[var(--preloader-bg,#DCE3E7)]"
         >
           {/* Subtle radial gradient background */}
           <div className="absolute inset-0 opacity-30">

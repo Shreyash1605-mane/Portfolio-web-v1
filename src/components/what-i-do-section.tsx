@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { ShieldCheck, Database, Cpu, Globe } from "lucide-react";
-import { useTilt } from "@/hooks/use-tilt";
 
 const specialties = [
   {
@@ -48,8 +47,6 @@ const specialties = [
 ];
 
 function TiltCard({ children, index }: { children: React.ReactNode; index: number }) {
-  const tilt = useTilt({ max: 8, perspective: 800, scale: 1.01, speed: 300 });
-
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
@@ -57,12 +54,17 @@ function TiltCard({ children, index }: { children: React.ReactNode; index: numbe
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       className="group"
+      whileHover={{
+        y: -6,
+        rotateX: 2,
+        rotateY: -2,
+        scale: 1.02,
+        transition: { duration: 0.3 },
+      }}
+      style={{ perspective: 800 }}
     >
       <div
-        ref={tilt.ref}
-        onMouseMove={tilt.onMouseMove}
-        onMouseLeave={tilt.onMouseLeave}
-        className="relative h-full p-6 rounded-2xl border border-cyber-border bg-cyber-card/50 backdrop-blur-sm elevated-card card-shine soft-focus-ring will-change-transform"
+        className="relative h-full p-6 rounded-2xl border border-cyber-border bg-cyber-card/50 backdrop-blur-sm elevated-card card-shine soft-focus-ring"
       >
         {children}
       </div>

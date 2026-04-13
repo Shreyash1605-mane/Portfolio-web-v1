@@ -5,6 +5,7 @@ import { Download, ArrowDown } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState, useRef } from "react";
 import ParticleCanvas from "@/components/particle-canvas";
+import TerminalShowcase from "@/components/terminal-showcase";
 import { useToast } from "@/hooks/use-toast";
 
 const roles = [
@@ -200,7 +201,7 @@ export default function HeroSection() {
             >
               <button
                 onClick={handleDownloadResume}
-                className="group inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-neon-blue hover:bg-neon-blue/90 text-silver font-semibold rounded-lg transition-all duration-300 shadow-lg shadow-neon-blue/15 hover:shadow-neon-blue/30 hover:scale-[1.02] active:scale-[0.98]"
+                className="group relative inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-neon-blue hover:bg-neon-blue/90 text-silver font-semibold rounded-lg transition-all duration-300 shadow-lg shadow-neon-blue/15 hover:shadow-neon-blue/30 hover:scale-[1.02] active:scale-[0.98] gradient-border"
               >
                 <Download className="w-4 h-4 transition-transform group-hover:-translate-y-0.5" />
                 Download Resume
@@ -236,6 +237,9 @@ export default function HeroSection() {
                 </span>
               ))}
             </motion.div>
+
+            {/* Terminal Showcase */}
+            <TerminalShowcase />
 
             {/* Quick stats with animated counters */}
             <motion.div

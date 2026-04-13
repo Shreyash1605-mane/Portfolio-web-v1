@@ -14,14 +14,8 @@ import CurrentFocusSection from "@/components/current-focus-section";
 import ContactSection from "@/components/contact-section";
 import TestimonialsSection from "@/components/testimonials-section";
 import FooterSection from "@/components/footer-section";
-
-function SectionDivider() {
-  return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="section-divider" />
-    </div>
-  );
-}
+import WaveDivider from "@/components/wave-divider";
+import ScrollSpy from "@/components/scroll-spy";
 
 export default function Home() {
   return (
@@ -29,25 +23,26 @@ export default function Home() {
       <PagePreloader />
       <CursorGlow />
       <Navbar />
+      <ScrollSpy />
       <main className="flex-1">
         <HeroSection />
-        <SectionDivider />
+        <WaveDivider variant="inverted" />
         <WhatIDoSection />
-        <SectionDivider />
+        <WaveDivider variant="normal" />
         <EducationSection />
-        <SectionDivider />
+        <WaveDivider variant="inverted" />
         <MilestonesSection />
-        <SectionDivider />
+        <WaveDivider variant="normal" />
         <ProjectsSection />
-        <SectionDivider />
+        <WaveDivider variant="inverted" />
         <ExperienceSection />
-        <SectionDivider />
+        <WaveDivider variant="normal" />
         <SkillsSection />
-        <SectionDivider />
+        <WaveDivider variant="inverted" />
         <CurrentFocusSection />
-        <SectionDivider />
+        <WaveDivider variant="normal" />
         <TestimonialsSection />
-        <SectionDivider />
+        <WaveDivider variant="inverted" />
         <ContactSection />
       </main>
       <FooterSection />
