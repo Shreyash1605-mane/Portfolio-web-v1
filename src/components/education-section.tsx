@@ -94,7 +94,7 @@ export default function EducationSection() {
                 {/* Timeline dot */}
                 <div className="absolute left-[18px] sm:left-[26px] top-6 z-10">
                   <div
-                    className={`w-5 h-5 rounded-full ${item.dotColor} ring-4 ring-cyber-dark/80`}
+                    className={`w-5 h-5 rounded-full ${item.dotColor} ring-4 ring-background`}
                   />
                 </div>
 
@@ -106,7 +106,7 @@ export default function EducationSection() {
                   <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">
                     <div className="flex items-start gap-3">
                       <div
-                        className={`flex items-center justify-center w-10 h-10 rounded-lg bg-cyber-dark ${item.color} shrink-0`}
+                        className={`flex items-center justify-center w-10 h-10 rounded-lg bg-neon-blue/10 ${item.color} shrink-0`}
                       >
                         <item.icon className="w-5 h-5" />
                       </div>

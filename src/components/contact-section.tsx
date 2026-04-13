@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Send, Mail, User, MessageSquare, CheckCircle } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({
@@ -11,6 +12,7 @@ export default function ContactSection() {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
+  const { toast } = useToast();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,6 +25,13 @@ export default function ContactSection() {
     );
     window.open(`mailto:maneshreyash16@gmail.com?subject=${subject}&body=${body}`);
     setSubmitted(true);
+
+    toast({
+      title: "Message Sent!",
+      description: `Thanks ${formData.name}! Your email client should open now.`,
+    });
+
+    setFormData({ name: "", email: "", message: "" });
     setTimeout(() => setSubmitted(false), 3000);
   };
 
@@ -95,7 +104,7 @@ export default function ContactSection() {
             </div>
 
             {/* Availability */}
-            <div className="p-6 rounded-2xl border border-emerald-400/20 bg-emerald-400/5">
+            <div className="p-6 rounded-2xl border border-emerald-400/20 bg-emerald-400/5 dark:bg-emerald-400/10">
               <div className="flex items-center gap-2 mb-2">
                 <span className="relative flex h-2.5 w-2.5">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
@@ -194,12 +203,13 @@ export default function ContactSection() {
               </div>
               <button
                 type="submit"
-                className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-neon-blue hover:bg-neon-blue/90 text-silver font-semibold rounded-lg transition-all duration-300 shadow-lg shadow-neon-blue/15 hover:shadow-neon-blue/30 hover:scale-[1.02] active:scale-[0.98]"
+                disabled={submitted}
+                className="group w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-neon-blue hover:bg-neon-blue/90 text-silver font-semibold rounded-lg transition-all duration-300 shadow-lg shadow-neon-blue/15 hover:shadow-neon-blue/30 hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed"
               >
                 {submitted ? (
                   <>
                     <CheckCircle className="w-4 h-4" />
-                    Opening Email Client
+                    Message Sent!
                   </>
                 ) : (
                   <>

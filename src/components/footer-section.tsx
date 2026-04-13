@@ -76,14 +76,24 @@ export default function FooterSection() {
 
           {/* Nav links */}
           <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 mb-6">
-            {["Home", "About", "Education", "Milestones", "Projects", "Experience", "Skills", "Testimonials", "Contact"].map(
+            {[
+              { label: "Home", href: "#hero" },
+              { label: "About", href: "#what-i-do" },
+              { label: "Education", href: "#education" },
+              { label: "Milestones", href: "#milestones" },
+              { label: "Projects", href: "#projects" },
+              { label: "Experience", href: "#experience" },
+              { label: "Skills", href: "#skills" },
+              { label: "Testimonials", href: "#testimonials" },
+              { label: "Contact", href: "#contact" },
+            ].map(
               (item) => (
                 <a
-                  key={item}
-                  href={`#${item.toLowerCase().replace(" ", "-")}`}
+                  key={item.label}
+                  href={item.href}
                   className="text-silver-dim hover:text-neon-blue text-sm transition-colors duration-300"
                 >
-                  {item}
+                  {item.label}
                 </a>
               )
             )}

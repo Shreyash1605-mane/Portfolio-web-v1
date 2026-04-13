@@ -10,6 +10,7 @@ import MilestonesSection from "@/components/milestones-section";
 import ProjectsSection from "@/components/projects-section";
 import ExperienceSection from "@/components/experience-section";
 import SkillsSection from "@/components/skills-section";
+import CurrentFocusSection from "@/components/current-focus-section";
 import ContactSection from "@/components/contact-section";
 import TestimonialsSection from "@/components/testimonials-section";
 import FooterSection from "@/components/footer-section";
@@ -42,6 +43,8 @@ export default function Home() {
         <ExperienceSection />
         <SectionDivider />
         <SkillsSection />
+        <SectionDivider />
+        <CurrentFocusSection />
         <SectionDivider />
         <TestimonialsSection />
         <SectionDivider />

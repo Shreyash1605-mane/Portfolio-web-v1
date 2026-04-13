@@ -9,6 +9,7 @@ import {
   Code2,
   Layers,
   Zap,
+  Filter,
 } from "lucide-react";
 import Image from "next/image";
 
@@ -19,6 +20,7 @@ const projects = [
     image: "/images/smart-parking.png",
     tags: ["Arduino", "ESP32", "IoT", "IR Sensors"],
     category: "IoT & Embedded",
+    filterCategory: "iot",
     description:
       "Real-time parking slot monitoring system using Arduino/ESP32 microcontroller with IR sensor integration for live slot availability updates.",
     techDetails:
@@ -38,6 +40,7 @@ const projects = [
     image: "/images/grampanchayat.png",
     tags: ["HTML", "JavaScript", "MySQL", "Web Dev"],
     category: "Web Development",
+    filterCategory: "web",
     description:
       "Digital governance dashboard for streamlining village record management and administrative processes.",
     techDetails:
@@ -57,6 +60,7 @@ const projects = [
     image: "/images/disease-prediction.png",
     tags: ["Python", "Scikit-learn", "Pandas", "ML"],
     category: "Machine Learning",
+    filterCategory: "ml",
     description:
       "Supervised learning models for predicting diseases based on patient symptoms and medical history data.",
     techDetails:
@@ -72,9 +76,17 @@ const projects = [
   },
 ];
 
+const filterCategories = [
+  { key: "all", label: "All Projects" },
+  { key: "iot", label: "IoT" },
+  { key: "web", label: "Web Dev" },
+  { key: "ml", label: "ML / AI" },
+];
+
 export default function ProjectsSection() {
   const [flippedCards, setFlippedCards] = useState<Set<number>>(new Set());
   const [selectedProject, setSelectedProject] = useState<number | null>(null);
+  const [activeFilter, setActiveFilter] = useState("all");
 
   const handleFlip = useCallback((index: number) => {
     setFlippedCards((prev) => {
@@ -87,6 +99,10 @@ export default function ProjectsSection() {
       return next;
     });
   }, []);
+
+  const filteredProjects = activeFilter === "all"
+    ? projects
+    : projects.filter((p) => p.filterCategory === activeFilter);
 
   const project = selectedProject !== null ? projects[selectedProject] : null;
 
@@ -101,7 +117,7 @@ export default function ProjectsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
           <p className="text-neon-blue font-mono text-sm mb-3 tracking-wider">
             PORTFOLIO
@@ -116,109 +132,165 @@ export default function ProjectsSection() {
           <div className="w-24 h-1 bg-neon-blue/50 mx-auto mt-6 rounded-full" />
         </motion.div>
 
-        {/* 3D Flip Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {projects.map((proj, index) => (
-            <motion.div
-              key={proj.id}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.15 }}
-              className={`flip-card h-[420px] sm:h-[460px] cursor-pointer ${flippedCards.has(index) ? "flipped" : ""}`}
-              onClick={() => handleFlip(index)}
-              onKeyDown={(e) => e.key === "Enter" && handleFlip(index)}
-              role="button"
-              tabIndex={0}
-              aria-label={`${proj.title} - click to ${flippedCards.has(index) ? "see front" : "see details"}`}
+        {/* Filter Tabs */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-12"
+        >
+          {filterCategories.map((cat) => (
+            <button
+              key={cat.key}
+              onClick={() => {
+                setActiveFilter(cat.key);
+                setFlippedCards(new Set());
+              }}
+              className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                activeFilter === cat.key
+                  ? "bg-neon-blue text-silver shadow-lg shadow-neon-blue/15"
+                  : "bg-cyber-card border border-cyber-border text-silver-dim hover:text-neon-blue hover:border-neon-blue/30"
+              }`}
             >
-              <div className="flip-card-inner relative w-full h-full">
-                {/* Front Side */}
-                <div className="flip-card-front absolute inset-0 rounded-2xl border border-cyber-border bg-cyber-card overflow-hidden group">
-                  <div className="relative h-48 sm:h-56 overflow-hidden">
-                    <Image
-                      src={proj.image}
-                      alt={proj.title}
-                      fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      className="object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-cyber-card via-transparent to-transparent" />
-                    {/* Category badge */}
-                    <div className="absolute top-3 left-3 px-2.5 py-1 bg-cyber-darker/80 backdrop-blur-sm rounded-md text-xs font-mono text-neon-blue border border-neon-blue/20">
-                      {proj.category}
-                    </div>
-                  </div>
-                  <div className="p-5 sm:p-6">
-                    <h3 className="text-lg sm:text-xl font-bold text-silver mb-2">
-                      {proj.title}
-                    </h3>
-                    <p className="text-silver-dim text-sm leading-relaxed mb-4 line-clamp-2">
-                      {proj.description}
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      {proj.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-2.5 py-1 bg-neon-blue/10 text-neon-blue rounded-md text-xs font-medium"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Back Side */}
-                <div className="flip-card-back absolute inset-0 rounded-2xl border border-neon-blue/30 bg-cyber-card overflow-hidden flex flex-col">
-                  <div className="p-5 sm:p-6 bg-gradient-to-br from-neon-blue/10 to-transparent border-b border-cyber-border">
-                    <h3 className="text-lg sm:text-xl font-bold text-silver mb-1">
-                      {proj.title}
-                    </h3>
-                    <p className="text-neon-blue text-sm font-medium">
-                      Technical Breakdown
-                    </p>
-                  </div>
-                  <div className="flex-1 p-5 sm:p-6 flex flex-col">
-                    <p className="text-silver-dim text-sm leading-relaxed flex-1">
-                      {proj.techDetails}
-                    </p>
-                    <div className="flex flex-wrap gap-2 mt-4 mb-3">
-                      {proj.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-2.5 py-1 bg-neon-blue/10 text-neon-blue rounded-md text-xs font-medium"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    <div className="flex gap-2">
-                      <a
-                        href={proj.github}
-                        onClick={(e) => e.stopPropagation()}
-                        className="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2.5 bg-neon-blue/10 hover:bg-neon-blue/20 text-neon-blue rounded-lg text-sm font-medium transition-all duration-300 border border-neon-blue/20 hover:border-neon-blue/40"
-                      >
-                        <Github className="w-4 h-4" />
-                        GitHub
-                      </a>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setSelectedProject(index);
-                        }}
-                        className="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2.5 bg-neon-blue hover:bg-neon-blue/90 text-silver rounded-lg text-sm font-medium transition-all duration-300"
-                      >
-                        <ExternalLink className="w-4 h-4" />
-                        Details
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
+              {activeFilter === cat.key && (
+                <Filter className="w-3.5 h-3.5" />
+              )}
+              {cat.label}
+            </button>
           ))}
-        </div>
+        </motion.div>
+
+        {/* 3D Flip Cards Grid */}
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={activeFilter}
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -15 }}
+            transition={{ duration: 0.3 }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
+          >
+            {filteredProjects.map((proj, index) => {
+              const originalIndex = projects.findIndex((p) => p.id === proj.id);
+              return (
+                <motion.div
+                  key={proj.id}
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: index * 0.15 }}
+                  className={`flip-card h-[420px] sm:h-[460px] cursor-pointer ${flippedCards.has(originalIndex) ? "flipped" : ""}`}
+                  onClick={() => handleFlip(originalIndex)}
+                  onKeyDown={(e) => e.key === "Enter" && handleFlip(originalIndex)}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={`${proj.title} - click to ${flippedCards.has(originalIndex) ? "see front" : "see details"}`}
+                >
+                  <div className="flip-card-inner relative w-full h-full">
+                    {/* Front Side */}
+                    <div className="flip-card-front absolute inset-0 rounded-2xl border border-cyber-border bg-cyber-card overflow-hidden group">
+                      <div className="relative h-48 sm:h-56 overflow-hidden">
+                        <Image
+                          src={proj.image}
+                          alt={proj.title}
+                          fill
+                          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                          className="object-cover transition-transform duration-500 group-hover:scale-110"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-cyber-card via-transparent to-transparent" />
+                        {/* Category badge */}
+                        <div className="absolute top-3 left-3 px-2.5 py-1 bg-cyber-darker/80 backdrop-blur-sm rounded-md text-xs font-mono text-neon-blue border border-neon-blue/20">
+                          {proj.category}
+                        </div>
+                        {/* Tap hint on mobile */}
+                        <div className="absolute bottom-3 right-3 sm:hidden px-2 py-1 bg-black/50 backdrop-blur-sm rounded-md text-[10px] text-white/80 font-mono">
+                          Tap to flip
+                        </div>
+                      </div>
+                      <div className="p-5 sm:p-6">
+                        <h3 className="text-lg sm:text-xl font-bold text-silver mb-2">
+                          {proj.title}
+                        </h3>
+                        <p className="text-silver-dim text-sm leading-relaxed mb-4 line-clamp-2">
+                          {proj.description}
+                        </p>
+                        <div className="flex flex-wrap gap-2">
+                          {proj.tags.map((tag) => (
+                            <span
+                              key={tag}
+                              className="px-2.5 py-1 bg-neon-blue/10 text-neon-blue rounded-md text-xs font-medium"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Back Side */}
+                    <div className="flip-card-back absolute inset-0 rounded-2xl border border-neon-blue/30 bg-cyber-card overflow-hidden flex flex-col">
+                      <div className="p-5 sm:p-6 bg-gradient-to-br from-neon-blue/10 to-transparent border-b border-cyber-border">
+                        <h3 className="text-lg sm:text-xl font-bold text-silver mb-1">
+                          {proj.title}
+                        </h3>
+                        <p className="text-neon-blue text-sm font-medium">
+                          Technical Breakdown
+                        </p>
+                      </div>
+                      <div className="flex-1 p-5 sm:p-6 flex flex-col">
+                        <p className="text-silver-dim text-sm leading-relaxed flex-1">
+                          {proj.techDetails}
+                        </p>
+                        <div className="flex flex-wrap gap-2 mt-4 mb-3">
+                          {proj.tags.map((tag) => (
+                            <span
+                              key={tag}
+                              className="px-2.5 py-1 bg-neon-blue/10 text-neon-blue rounded-md text-xs font-medium"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                        <div className="flex gap-2">
+                          <a
+                            href={proj.github}
+                            onClick={(e) => e.stopPropagation()}
+                            className="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2.5 bg-neon-blue/10 hover:bg-neon-blue/20 text-neon-blue rounded-lg text-sm font-medium transition-all duration-300 border border-neon-blue/20 hover:border-neon-blue/40"
+                          >
+                            <Github className="w-4 h-4" />
+                            GitHub
+                          </a>
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setSelectedProject(originalIndex);
+                            }}
+                            className="flex-1 inline-flex items-center justify-center gap-2 px-3 py-2.5 bg-neon-blue hover:bg-neon-blue/90 text-silver rounded-lg text-sm font-medium transition-all duration-300"
+                          >
+                            <ExternalLink className="w-4 h-4" />
+                            Details
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+        </AnimatePresence>
+
+        {filteredProjects.length === 0 && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-center py-16"
+          >
+            <p className="text-silver-dim text-lg">No projects in this category yet.</p>
+            <p className="text-silver-dim/60 text-sm mt-2">Check back soon!</p>
+          </motion.div>
+        )}
       </div>
 
       {/* Project Detail Modal */}

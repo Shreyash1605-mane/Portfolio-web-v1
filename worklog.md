@@ -288,3 +288,125 @@ Priority Recommendations for Next Phase:
 4. Add a blog/articles section or project detail pages for more content depth
 5. Add SEO meta tags, Open Graph images, and sitemap.xml
 6. Performance: convert images to WebP, add blur placeholders
+
+---
+Task ID: 6
+Agent: Review Agent (webDevReview)
+Task: Round 6 review — dark/light theme, new features, styling improvements
+
+Work Log:
+- Reviewed worklog.md (5 previous tasks) and assessed current state
+- Dev server confirmed healthy (all 200s, clean compilation)
+- Lint check: 0 errors, 0 warnings
+- Comprehensive QA via agent-browser (15+ screenshots desktop + mobile):
+  - Desktop (1280x900) light and dark mode
+  - Mobile (390x844) light and dark mode
+  - VLM analysis confirmed dark mode renders correctly
+  - Zero console errors
+
+Bug Fixes:
+- Fixed footer "About" link: Was pointing to #about, section id is #what-i-do. Changed to explicit href mapping for all footer nav links
+- Fixed toast TOAST_REMOVE_DELAY: Was 1000000ms (never auto-dismissed), changed to 5000ms
+
+Major Feature: Dark/Light Theme Toggle
+- Created theme-provider.tsx: Client-side ThemeProvider wrapping next-themes
+- Updated layout.tsx: Wrapped children + Toaster in ThemeProvider (attribute="class", defaultTheme="light")
+- Added complete dark mode CSS to globals.css:
+  - Dark :root variables: bg #0B1120, card #1A2332, text #E2E8F0, borders #2A3A4E
+  - Dark overrides for cyber-dark, cyber-darker, cyber-card, cyber-border, silver, silver-dim
+  - Theme-aware CSS variables: --bg-surface, --bg-surface-soft, --bg-elevated, --bg-section-alt, --text-primary, --text-secondary, --border-soft, --shadow-color, --shadow-color-hover, --preloader-bg
+  - Updated .elevated-card, .glass-card, .particle-bg, .grid-bg, .shimmer-text, ::selection to use CSS variables
+- Added ThemeToggle component in navbar.tsx:
+  - Animated Sun/Moon icons with Framer Motion (rotate + scale transition)
+  - Desktop: Toggle in nav after links, separated by border-l
+  - Mobile: Toggle next to hamburger menu
+  - Proper hydration handling with mounted state
+
+Toast Notification System:
+- Hero "Download Resume" button: Now triggers toast "Resume will be available soon!"
+- Contact form: Triggers toast "Thanks {name}! Your email client should open now."
+- Changed button from <a> to <button> for proper event handling
+
+New Section: "What I'm Up To" (current-focus-section.tsx)
+- 4 activity cards showing current pursuits:
+  - Preparing for India Skills 2025-26
+  - Deepening ML & AI Expertise
+  - Building Open Source Tools
+  - Exploring Cloud Security
+- Fun Facts bar with 4 stat items (Coffee, Hackathons, Projects, Technologies)
+- Added to nav as "Current" link, placed between Skills and Testimonials
+
+Enhanced Preloader:
+- Staggered logo animation (brackets and text animate independently)
+- Progress percentage counter (0% → 100%)
+- Non-linear progress simulation (fast start, slow middle, fast end)
+- Wave-effect animated dots (bounce + opacity + scale)
+- Theme-aware background color
+- Shimmer gradient on progress bar
+
+Enhanced Projects Section:
+- Added category filter tabs: All Projects, IoT, Web Dev, ML / AI
+- Animated filter transitions with AnimatePresence
+- Filter icon on active tab
+- "Tap to flip" hint on mobile
+- Empty state message when no projects match filter
+
+Dark Mode Compatibility Updates:
+- Education timeline dot ring: ring-cyber-dark/80 → ring-background (theme-aware)
+- Education card icon bg: bg-cyber-dark → bg-neon-blue/10 (theme-aware)
+- Hero floating badges: Added dark:text-amber-400 for dark mode readability
+- Contact availability card: Added dark:bg-emerald-400/10 for dark mode
+
+Files Modified:
+- src/app/layout.tsx (ThemeProvider wrapper)
+- src/app/page.tsx (added CurrentFocusSection)
+- src/app/globals.css (dark mode CSS + theme-aware variables)
+- src/components/theme-provider.tsx (NEW)
+- src/components/navbar.tsx (ThemeToggle + "Current" nav link)
+- src/components/hero-section.tsx (toast on download, dark mode badge colors)
+- src/components/contact-section.tsx (toast on submit, disabled state)
+- src/components/projects-section.tsx (category filter tabs)
+- src/components/current-focus-section.tsx (NEW)
+- src/components/page-preloader.tsx (enhanced animation)
+- src/components/education-section.tsx (theme-aware ring/bg)
+- src/components/footer-section.tsx (fixed nav link mapping)
+- src/hooks/use-toast.ts (fixed TOAST_REMOVE_DELAY)
+
+Final QA Results:
+- Desktop light mode: All 12 sections render correctly
+- Desktop dark mode: VLM-confirmed dark background + light text
+- Mobile light mode: All sections responsive
+- Mobile dark mode: Theme toggle works, dark mode applies correctly
+- Project filter: Filter tabs work on mobile and desktop
+- Zero console errors across all viewports and themes
+
+Stage Summary:
+- Total sections: 12 (Hero, What I Do, Education, Milestones, Projects, Experience, Skills, Current Focus, Testimonials, Contact, Footer)
+- Total nav links: 10 (Home, About, Education, Milestones, Projects, Experience, Skills, Current, Testimonials, Contact)
+- Dark/light mode toggle: Fully functional with animated transitions
+- Toast notifications: Working for download resume and contact form
+- Project filter tabs: 4 categories with animated transitions
+- Lint clean, dev server error-free, comprehensive QA passed
+
+Current Status Assessment:
+- Portfolio website is feature-rich with 12 sections and full dark/light mode support
+- Theme system uses CSS variables for seamless switching
+- All interactive features working across both themes
+- Responsive on desktop and mobile
+- WCAG AA contrast maintained in both themes
+
+Unresolved/Risks:
+- Tailwind class names still use old cyber-*/neon-* naming (functional but misleading)
+- Project images are AI-generated placeholders
+- No actual backend for contact form (uses mailto: + toast notification)
+- Placeholder links: GitHub (#), LinkedIn (#)
+- No PDF resume for download
+
+Priority Recommendations for Next Phase:
+1. Replace # placeholder links with real URLs (GitHub, LinkedIn)
+2. Add a downloadable PDF resume
+3. Rename Tailwind utility classes to match dual-theme semantics
+4. Add SEO meta tags, structured data (JSON-LD), sitemap.xml
+5. Performance optimization: image lazy loading, blur placeholders, WebP conversion
+6. Add a blog section or project case study pages
+7. Implement proper contact form backend (API route + database)

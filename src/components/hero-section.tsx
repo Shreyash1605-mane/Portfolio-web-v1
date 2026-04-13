@@ -5,6 +5,7 @@ import { Download, ArrowDown } from "lucide-react";
 import Image from "next/image";
 import { useEffect, useState, useRef } from "react";
 import ParticleCanvas from "@/components/particle-canvas";
+import { useToast } from "@/hooks/use-toast";
 
 const roles = [
   "Cybersecurity",
@@ -101,6 +102,15 @@ function TypingText({ words, delay = 0 }: { words: string[]; delay?: number }) {
 }
 
 export default function HeroSection() {
+  const { toast } = useToast();
+
+  const handleDownloadResume = () => {
+    toast({
+      title: "Resume Download",
+      description: "Resume will be available soon! Stay tuned.",
+    });
+  };
+
   return (
     <section
       id="hero"
@@ -188,13 +198,13 @@ export default function HeroSection() {
               transition={{ delay: 0.7, duration: 0.5 }}
               className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
             >
-              <a
-                href="#"
+              <button
+                onClick={handleDownloadResume}
                 className="group inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-neon-blue hover:bg-neon-blue/90 text-silver font-semibold rounded-lg transition-all duration-300 shadow-lg shadow-neon-blue/15 hover:shadow-neon-blue/30 hover:scale-[1.02] active:scale-[0.98]"
               >
                 <Download className="w-4 h-4 transition-transform group-hover:-translate-y-0.5" />
                 Download Resume
-              </a>
+              </button>
               <a
                 href="#projects"
                 className="group inline-flex items-center justify-center gap-2 px-8 py-3.5 border border-cyber-border hover:border-neon-blue/50 text-silver hover:text-neon-blue font-semibold rounded-lg transition-all duration-300 hover:bg-neon-blue/5 active:scale-[0.98]"
@@ -292,7 +302,7 @@ export default function HeroSection() {
               <motion.div
                 animate={{ y: [0, -8, 0] }}
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -top-4 -right-4 sm:top-0 sm:-right-8 px-3 py-1.5 bg-cyber-card border border-cyber-border rounded-lg text-xs font-mono text-[#C2410C] shadow-lg shadow-black/20"
+                className="absolute -top-4 -right-4 sm:top-0 sm:-right-8 px-3 py-1.5 bg-cyber-card border border-cyber-border rounded-lg text-xs font-mono text-[#C2410C] dark:text-amber-400 shadow-lg shadow-black/20"
               >
                 🔒 Cybersecurity
               </motion.div>
@@ -304,7 +314,7 @@ export default function HeroSection() {
                   ease: "easeInOut",
                   delay: 0.5,
                 }}
-                className="absolute -bottom-4 -left-4 sm:bottom-4 sm:-left-8 px-3 py-1.5 bg-cyber-card border border-cyber-border rounded-lg text-xs font-mono text-[#C2410C] shadow-lg shadow-black/20"
+                className="absolute -bottom-4 -left-4 sm:bottom-4 sm:-left-8 px-3 py-1.5 bg-cyber-card border border-cyber-border rounded-lg text-xs font-mono text-[#C2410C] dark:text-amber-400 shadow-lg shadow-black/20"
               >
                 📊 Data Science
               </motion.div>
@@ -316,7 +326,7 @@ export default function HeroSection() {
                   ease: "easeInOut",
                   delay: 1,
                 }}
-                className="absolute top-1/2 -right-8 sm:-right-12 px-3 py-1.5 bg-cyber-card border border-cyber-border rounded-lg text-xs font-mono text-[#C2410C] shadow-lg shadow-black/20"
+                className="absolute top-1/2 -right-8 sm:-right-12 px-3 py-1.5 bg-cyber-card border border-cyber-border rounded-lg text-xs font-mono text-[#C2410C] dark:text-amber-400 shadow-lg shadow-black/20"
               >
                 🏆 Silver Medalist
               </motion.div>
@@ -328,7 +338,7 @@ export default function HeroSection() {
                   ease: "easeInOut",
                   delay: 0.8,
                 }}
-                className="hidden sm:flex absolute -top-2 -left-8 sm:-left-12 px-3 py-1.5 bg-cyber-card border border-cyber-border rounded-lg text-xs font-mono text-[#C2410C] shadow-lg shadow-black/20"
+                className="hidden sm:flex absolute -top-2 -left-8 sm:-left-12 px-3 py-1.5 bg-cyber-card border border-cyber-border rounded-lg text-xs font-mono text-[#C2410C] dark:text-amber-400 shadow-lg shadow-black/20"
               >
                 🤖 IoT
               </motion.div>
