@@ -88,6 +88,9 @@ export default function ExperienceSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
+          <p className="text-neon-blue font-mono text-sm mb-3 tracking-wider">
+            JOURNEY
+          </p>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
             Experience &{" "}
             <span className="shimmer-text">Certifications</span>
@@ -122,12 +125,12 @@ export default function ExperienceSection() {
                 <CarouselItem key={index}>
                   <div className="p-1">
                     <div
-                      className={`border ${exp.borderColor} rounded-2xl bg-cyber-card/80 backdrop-blur-sm p-6 sm:p-8 transition-all duration-300`}
+                      className={`border ${exp.borderColor} rounded-2xl bg-cyber-card/80 backdrop-blur-sm p-6 sm:p-8 transition-all duration-300 glow-hover`}
                     >
                       {/* Header */}
                       <div className="flex items-start gap-4 mb-6">
                         <div
-                          className={`flex items-center justify-center w-14 h-14 rounded-xl ${exp.bgColor} shrink-0`}
+                          className={`flex items-center justify-center w-14 h-14 rounded-xl ${exp.bgColor} shrink-0 transition-transform duration-300`}
                         >
                           <exp.icon className={`w-7 h-7 ${exp.color}`} />
                         </div>

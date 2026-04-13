@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Github, ExternalLink } from "lucide-react";
 import Image from "next/image";
+import { useState, useCallback } from "react";
 
 const projects = [
   {
@@ -38,6 +39,20 @@ const projects = [
 ];
 
 export default function ProjectsSection() {
+  const [flippedCards, setFlippedCards] = useState<Set<number>>(new Set());
+
+  const handleFlip = useCallback((index: number) => {
+    setFlippedCards((prev) => {
+      const next = new Set(prev);
+      if (next.has(index)) {
+        next.delete(index);
+      } else {
+        next.add(index);
+      }
+      return next;
+    });
+  }, []);
+
   return (
     <section id="projects" className="relative py-24 sm:py-32">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-neon-blue/[0.02] to-transparent pointer-events-none" />
@@ -51,12 +66,15 @@ export default function ProjectsSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
+          <p className="text-neon-blue font-mono text-sm mb-3 tracking-wider">
+            PORTFOLIO
+          </p>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
             Featured{" "}
             <span className="shimmer-text">Projects</span>
           </h2>
           <p className="text-silver-dim max-w-2xl mx-auto text-base sm:text-lg">
-            Hover over the cards to explore the technical details behind each
+            Hover or tap the cards to explore the technical details behind each
             project.
           </p>
           <div className="w-24 h-1 bg-neon-blue/50 mx-auto mt-6 rounded-full" />
@@ -71,7 +89,12 @@ export default function ProjectsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.15 }}
-              className="flip-card h-[420px] sm:h-[460px]"
+              className={`flip-card h-[420px] sm:h-[460px] cursor-pointer ${flippedCards.has(index) ? "flipped" : ""}`}
+              onClick={() => handleFlip(index)}
+              onKeyDown={(e) => e.key === "Enter" && handleFlip(index)}
+              role="button"
+              tabIndex={0}
+              aria-label={`${project.title} - click to ${flippedCards.has(index) ? "see front" : "see details"}`}
             >
               <div className="flip-card-inner relative w-full h-full">
                 {/* Front Side */}
@@ -85,10 +108,10 @@ export default function ProjectsSection() {
                       className="object-cover transition-transform duration-500 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-cyber-card via-transparent to-transparent" />
-                    {/* Hover indicator */}
+                    {/* Hover/tap indicator */}
                     <div className="absolute inset-0 flex items-center justify-center bg-neon-blue/0 group-hover:bg-neon-blue/10 transition-all duration-300">
                       <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 px-4 py-2 bg-cyber-darker/80 backdrop-blur-sm rounded-full text-sm font-medium text-silver border border-cyber-border">
-                        Hover to flip
+                        Tap to flip
                       </div>
                     </div>
                   </div>
@@ -147,6 +170,7 @@ export default function ProjectsSection() {
                     {/* GitHub link */}
                     <a
                       href={project.github}
+                      onClick={(e) => e.stopPropagation()}
                       className="inline-flex items-center gap-2 px-4 py-2.5 bg-neon-blue/10 hover:bg-neon-blue/20 text-neon-blue rounded-lg text-sm font-medium transition-all duration-300 border border-neon-blue/20 hover:border-neon-blue/40"
                     >
                       <Github className="w-4 h-4" />

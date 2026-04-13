@@ -141,6 +141,26 @@
   }
 }
 
+@keyframes typing-cursor {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+@keyframes grid-move {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(40px); }
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.8); opacity: 1; }
+  100% { transform: scale(2); opacity: 0; }
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
 .neon-glow {
   animation: neon-pulse 3s ease-in-out infinite;
 }
@@ -158,7 +178,14 @@
   animation: shimmer 4s linear infinite;
 }
 
-/* 3D Flip Card */
+.typing-cursor::after {
+  content: '|';
+  animation: typing-cursor 1s step-end infinite;
+  color: #3b82f6;
+  font-weight: 300;
+}
+
+/* 3D Flip Card - supports both hover and click */
 .flip-card {
   perspective: 1000px;
 }
@@ -168,7 +195,8 @@
   transform-style: preserve-3d;
 }
 
-.flip-card:hover .flip-card-inner {
+.flip-card:hover .flip-card-inner,
+.flip-card.flipped .flip-card-inner {
   transform: rotateY(180deg);
 }
 
@@ -198,4 +226,78 @@
 .particle-bg {
   background-image: radial-gradient(circle at 1px 1px, rgba(59, 130, 246, 0.15) 1px, transparent 0);
   background-size: 40px 40px;
+}
+
+/* Grid background */
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* Scroll progress bar */
+.scroll-progress {
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 0.1s linear;
+}
+
+.scroll-progress.visible {
+  transform: scaleX(1);
+}
+
+/* Glass morphism card */
+.glass-card {
+  background: rgba(30, 41, 59, 0.6);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(51, 65, 85, 0.5);
+}
+
+/* Glow on hover for cards */
+.glow-hover {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glow-hover:hover {
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.15), 0 0 40px rgba(59, 130, 246, 0.05);
+  border-color: rgba(59, 130, 246, 0.3);
+}
+
+/* Active nav link indicator */
+.nav-active {
+  color: #3b82f6 !important;
+  background-color: rgba(59, 130, 246, 0.1);
+}
+
+/* Scanline overlay effect */
+.scanline-overlay::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.15), transparent);
+  animation: scanline 8s linear infinite;
+  pointer-events: none;
+}
+
+/* Input focus styling */
+input:focus, textarea:focus {
+  outline: none;
+  border-color: #3b82f6 !important;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection color */
+::selection {
+  background: rgba(59, 130, 246, 0.3);
+  color: #e2e8f0;
 }

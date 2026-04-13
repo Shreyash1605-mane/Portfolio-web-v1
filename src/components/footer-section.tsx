@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, Github, Linkedin, Heart } from "lucide-react";
+import { Mail, Github, Linkedin, Heart, MapPin } from "lucide-react";
 
 const socialLinks = [
   {
@@ -26,7 +26,7 @@ const socialLinks = [
 
 export default function FooterSection() {
   return (
-    <footer className="relative border-t border-cyber-border">
+    <footer className="relative border-t border-cyber-border mt-auto">
       <div className="absolute inset-0 bg-gradient-to-t from-cyber-darker/50 to-transparent pointer-events-none" />
 
       <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -41,17 +41,18 @@ export default function FooterSection() {
           <h3 className="text-xl sm:text-2xl font-bold text-silver mb-2">
             Shreyash Mane
           </h3>
-          <p className="text-silver-dim text-sm mb-8">
-            Computer Science Student | Cybersecurity & Data Science Enthusiast
-          </p>
+          <div className="flex items-center justify-center gap-2 text-silver-dim text-sm mb-6">
+            <MapPin className="w-3.5 h-3.5" />
+            <span>Maharashtra, India</span>
+          </div>
 
           {/* Social Links */}
-          <div className="flex justify-center gap-4 mb-8">
+          <div className="flex justify-center gap-4 mb-6">
             {socialLinks.map((link) => (
               <a
                 key={link.name}
                 href={link.href}
-                className="group flex items-center justify-center w-12 h-12 rounded-xl bg-cyber-card border border-cyber-border hover:border-neon-blue/50 hover:bg-neon-blue/10 transition-all duration-300"
+                className="group flex items-center justify-center w-12 h-12 rounded-xl bg-cyber-card border border-cyber-border hover:border-neon-blue/50 hover:bg-neon-blue/10 transition-all duration-300 hover:scale-110"
                 aria-label={link.label}
                 title={link.label}
               >
@@ -72,9 +73,24 @@ export default function FooterSection() {
           {/* Divider */}
           <div className="w-16 h-px bg-cyber-border mx-auto mb-6" />
 
+          {/* Nav links */}
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 mb-6">
+            {["Home", "About", "Milestones", "Projects", "Experience", "Skills", "Contact"].map(
+              (item) => (
+                <a
+                  key={item}
+                  href={`#${item.toLowerCase().replace(" ", "-")}`}
+                  className="text-silver-dim hover:text-neon-blue text-sm transition-colors duration-300"
+                >
+                  {item}
+                </a>
+              )
+            )}
+          </div>
+
           {/* Copyright */}
           <p className="text-silver-dim text-xs flex items-center justify-center gap-1.5">
-            Built with
+            Designed & Built with
             <Heart className="w-3 h-3 text-red-400 fill-red-400" />
             by Shreyash Mane &copy; {new Date().getFullYear()}
           </p>

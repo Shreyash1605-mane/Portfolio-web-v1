@@ -48,7 +48,7 @@ function SkillBar({ name, level, delay }: { name: string; level: number; delay: 
         <span className="text-sm font-medium text-silver group-hover:text-neon-blue transition-colors duration-300">
           {name}
         </span>
-        <span className="text-xs font-mono text-silver-dim">{level}%</span>
+        <span className="text-xs font-mono text-silver-dim tabular-nums">{level}%</span>
       </div>
       <div className="h-2 bg-cyber-border/50 rounded-full overflow-hidden">
         <motion.div
@@ -58,9 +58,14 @@ function SkillBar({ name, level, delay }: { name: string; level: number; delay: 
           transition={{ duration: 1, delay: delay + 0.2, ease: "easeOut" }}
           className="h-full rounded-full bg-gradient-to-r from-neon-blue to-neon-glow relative overflow-hidden"
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-[shimmer_2s_linear_infinite]" style={{
-            backgroundSize: '200% 100%',
-          }} />
+          <div
+            className="absolute inset-0 animate-[shimmer_2s_linear_infinite]"
+            style={{
+              background:
+                "linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)",
+              backgroundSize: "200% 100%",
+            }}
+          />
         </motion.div>
       </div>
     </motion.div>
@@ -81,6 +86,9 @@ export default function SkillsSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
+          <p className="text-neon-blue font-mono text-sm mb-3 tracking-wider">
+            TECH STACK
+          </p>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
             Technical{" "}
             <span className="shimmer-text">Arsenal</span>
@@ -100,7 +108,7 @@ export default function SkillsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: catIndex * 0.15 }}
-              className="border border-cyber-border rounded-2xl bg-cyber-card/50 backdrop-blur-sm p-6 hover:border-neon-blue/30 transition-all duration-300 hover:shadow-lg hover:shadow-neon-blue/5 group"
+              className="border border-cyber-border rounded-2xl bg-cyber-card/50 backdrop-blur-sm p-6 glow-hover hover:-translate-y-1 group transition-transform duration-300"
             >
               {/* Category Header */}
               <div className="flex items-center gap-3 mb-6 pb-4 border-b border-cyber-border">
@@ -149,7 +157,7 @@ export default function SkillsSection() {
             ].map((tool) => (
               <span
                 key={tool}
-                className="px-4 py-2 bg-cyber-card border border-cyber-border rounded-full text-sm text-silver-dim hover:text-neon-blue hover:border-neon-blue/30 transition-all duration-300 cursor-default"
+                className="px-4 py-2 bg-cyber-card border border-cyber-border rounded-full text-sm text-silver-dim hover:text-neon-blue hover:border-neon-blue/30 hover:bg-neon-blue/5 transition-all duration-300 cursor-default"
               >
                 {tool}
               </span>

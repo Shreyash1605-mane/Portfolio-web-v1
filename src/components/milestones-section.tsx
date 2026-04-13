@@ -131,6 +131,9 @@ export default function MilestonesSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
+          <p className="text-neon-blue font-mono text-sm mb-3 tracking-wider">
+            ACHIEVEMENTS
+          </p>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
             Professional{" "}
             <span className="shimmer-text">Milestones</span>
@@ -156,32 +159,39 @@ export default function MilestonesSection() {
             className="space-y-4"
           >
             {milestones.map((milestone, index) => (
-              <AccordionItem
+              <motion.div
                 key={milestone.id}
-                value={milestone.id}
-                className={`border ${milestone.borderColor} rounded-xl bg-cyber-card/50 backdrop-blur-sm transition-all duration-300 px-6 data-[state=open]:shadow-lg data-[state=open]:shadow-neon-blue/5`}
+                initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
               >
-                <AccordionTrigger className="hover:no-underline py-5">
-                  <div className="flex items-center gap-4">
-                    <div
-                      className={`flex items-center justify-center w-10 h-10 rounded-lg ${milestone.bgColor} ${milestone.color} shrink-0`}
-                    >
-                      <milestone.icon className="w-5 h-5" />
-                    </div>
-                    <div className="text-left">
-                      <div className="text-base sm:text-lg font-semibold text-silver">
-                        {milestone.title}
+                <AccordionItem
+                  value={milestone.id}
+                  className={`border ${milestone.borderColor} rounded-xl bg-cyber-card/50 backdrop-blur-sm transition-all duration-300 px-6 data-[state=open]:shadow-lg data-[state=open]:shadow-neon-blue/5`}
+                >
+                  <AccordionTrigger className="hover:no-underline py-5">
+                    <div className="flex items-center gap-4">
+                      <div
+                        className={`flex items-center justify-center w-10 h-10 rounded-lg ${milestone.bgColor} ${milestone.color} shrink-0`}
+                      >
+                        <milestone.icon className="w-5 h-5" />
                       </div>
-                      <div className="text-sm text-silver-dim mt-0.5">
-                        {milestone.badge}
+                      <div className="text-left">
+                        <div className="text-base sm:text-lg font-semibold text-silver">
+                          {milestone.title}
+                        </div>
+                        <div className="text-sm text-silver-dim mt-0.5">
+                          {milestone.badge}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </AccordionTrigger>
-                <AccordionContent className="text-silver-dim">
-                  {milestone.content}
-                </AccordionContent>
-              </AccordionItem>
+                  </AccordionTrigger>
+                  <AccordionContent className="text-silver-dim">
+                    {milestone.content}
+                  </AccordionContent>
+                </AccordionItem>
+              </motion.div>
             ))}
           </Accordion>
         </motion.div>
