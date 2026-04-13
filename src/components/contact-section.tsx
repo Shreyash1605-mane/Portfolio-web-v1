@@ -63,7 +63,7 @@ export default function ContactSection() {
             className="lg:col-span-2 space-y-8"
           >
             {/* Contact card */}
-            <div className="p-6 rounded-2xl border border-cyber-border bg-cyber-card/50 backdrop-blur-sm">
+            <div className="p-6 rounded-2xl border border-cyber-border bg-cyber-card/50 backdrop-blur-sm shadow-lg shadow-black/[0.04]">
               <h3 className="text-lg font-bold text-silver mb-4">
                 Contact Information
               </h3>
@@ -122,7 +122,7 @@ export default function ContactSection() {
           >
             <form
               onSubmit={handleSubmit}
-              className="p-6 sm:p-8 rounded-2xl border border-cyber-border bg-cyber-card/50 backdrop-blur-sm space-y-5"
+              className="p-6 sm:p-8 rounded-2xl border border-cyber-border bg-cyber-card/50 backdrop-blur-sm shadow-lg shadow-black/[0.04] space-y-5"
             >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>

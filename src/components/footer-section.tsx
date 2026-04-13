@@ -26,7 +26,8 @@ const socialLinks = [
 
 export default function FooterSection() {
   return (
-    <footer className="relative border-t border-cyber-border mt-auto">
+    <footer className="relative mt-auto">
+      <div className="h-px bg-gradient-to-r from-transparent via-neon-blue/30 to-transparent" />
       <div className="absolute inset-0 bg-gradient-to-t from-cyber-darker/50 to-transparent pointer-events-none" />
 
       <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -52,7 +53,7 @@ export default function FooterSection() {
               <a
                 key={link.name}
                 href={link.href}
-                className="group flex items-center justify-center w-12 h-12 rounded-xl bg-cyber-card border border-cyber-border hover:border-neon-blue/50 hover:bg-neon-blue/10 transition-all duration-300 hover:scale-110"
+                className="group flex items-center justify-center w-12 h-12 rounded-xl bg-cyber-card border border-cyber-border hover:border-neon-blue/50 hover:bg-neon-blue/10 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-neon-blue/10"
                 aria-label={link.label}
                 title={link.label}
               >

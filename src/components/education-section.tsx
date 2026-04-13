@@ -79,7 +79,7 @@ export default function EducationSection() {
         {/* Timeline */}
         <div className="max-w-3xl mx-auto relative">
           {/* Vertical line */}
-          <div className="absolute left-6 sm:left-8 top-0 bottom-0 w-px bg-cyber-border" />
+          <div className="absolute left-6 sm:left-8 top-0 bottom-0 w-px bg-gradient-to-b from-neon-blue/40 via-neon-blue/15 to-transparent" />
 
           <div className="space-y-8">
             {education.map((item, index) => (
@@ -94,13 +94,13 @@ export default function EducationSection() {
                 {/* Timeline dot */}
                 <div className="absolute left-[18px] sm:left-[26px] top-6 z-10">
                   <div
-                    className={`w-4 h-4 rounded-full ${item.dotColor} ring-4 ring-cyber-dark`}
+                    className={`w-5 h-5 rounded-full ${item.dotColor} ring-4 ring-cyber-dark/80`}
                   />
                 </div>
 
                 {/* Card */}
                 <div
-                  className={`p-5 sm:p-6 rounded-xl border ${item.borderColor} bg-cyber-card/50 backdrop-blur-sm glow-hover hover:-translate-y-0.5 transition-all duration-300`}
+                  className={`p-5 sm:p-6 rounded-xl border ${item.borderColor} bg-cyber-card/50 backdrop-blur-sm shadow-lg shadow-black/[0.04] glow-hover hover:-translate-y-0.5 transition-all duration-300`}
                 >
                   {/* Header */}
                   <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-3">

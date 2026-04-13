@@ -31,13 +31,10 @@ export default function CursorGlow() {
   return (
     <div
       ref={glowRef}
-      className="fixed top-0 left-0 w-[300px] h-[300px] pointer-events-none z-[55] opacity-0 transition-opacity duration-300"
+      className="fixed top-0 left-0 w-[300px] h-[300px] pointer-events-none z-[55] opacity-[0.03]"
       style={{
         background:
           "radial-gradient(circle, rgba(255,155,81,0.07) 0%, transparent 70%)",
-      }}
-      onMouseEnter={(e) => {
-        (e.currentTarget as HTMLDivElement).style.opacity = "1";
       }}
     />
   );

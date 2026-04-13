@@ -50,7 +50,7 @@ function SkillBar({ name, level, delay }: { name: string; level: number; delay: 
         </span>
         <span className="text-xs font-mono text-silver-dim tabular-nums">{level}%</span>
       </div>
-      <div className="h-2 bg-cyber-border/50 rounded-full overflow-hidden">
+      <div className="h-2.5 bg-cyber-border/50 rounded-full overflow-hidden">
         <motion.div
           initial={{ width: 0 }}
           whileInView={{ width: `${level}%` }}
@@ -157,7 +157,7 @@ export default function SkillsSection() {
             ].map((tool) => (
               <span
                 key={tool}
-                className="px-4 py-2 bg-cyber-card border border-cyber-border rounded-full text-sm text-[#374151] hover:text-neon-blue hover:border-neon-blue/30 hover:bg-neon-blue/5 transition-all duration-300 cursor-default"
+                className="px-4 py-2 bg-cyber-card border border-cyber-border rounded-full text-sm text-foreground/70 hover:text-neon-blue hover:border-neon-blue/30 hover:bg-neon-blue/5 transition-all duration-300 cursor-default"
               >
                 {tool}
               </span>

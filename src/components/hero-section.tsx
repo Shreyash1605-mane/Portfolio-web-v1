@@ -120,7 +120,7 @@ export default function HeroSection() {
       {/* Animated grid lines */}
       <div className="absolute inset-0 grid-bg pointer-events-none opacity-50" />
 
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Left Side - Content */}
           <motion.div
@@ -134,7 +134,7 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-neon-blue/10 border border-neon-blue/20 text-neon-blue text-sm font-medium mb-6"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-neon-blue/15 border border-neon-blue/30 text-neon-blue text-sm sm:text-base font-medium mb-6"
             >
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-neon-blue opacity-75" />
@@ -148,7 +148,7 @@ export default function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.25, duration: 0.5 }}
-              className="text-silver-dim text-sm sm:text-base font-mono mb-3 tracking-wider"
+              className="text-silver-dim text-sm sm:text-base font-mono mb-4 tracking-wider"
             >
               &gt; Hello, I&apos;m
             </motion.p>
@@ -260,7 +260,7 @@ export default function HeroSection() {
                 <div className="absolute inset-6 rounded-full border border-dashed border-neon-blue/10 animate-[spin_30s_linear_infinite_reverse]" />
 
                 {/* Neon glow container */}
-                <div className="absolute inset-4 rounded-full neon-glow overflow-hidden">
+                <div className="absolute inset-4 rounded-full neon-glow overflow-hidden" style={{ boxShadow: '0 8px 40px rgba(255,155,81,0.2), 0 0 60px rgba(255,155,81,0.08)' }}>
                   <Image
                     src="/images/headshot.png"
                     alt="Shreyash Mane"
@@ -328,7 +328,7 @@ export default function HeroSection() {
                   ease: "easeInOut",
                   delay: 0.8,
                 }}
-                className="absolute -top-2 -left-8 sm:-left-12 px-3 py-1.5 bg-cyber-card border border-cyber-border rounded-lg text-xs font-mono text-[#C2410C] shadow-lg shadow-black/20"
+                className="hidden sm:flex absolute -top-2 -left-8 sm:-left-12 px-3 py-1.5 bg-cyber-card border border-cyber-border rounded-lg text-xs font-mono text-[#C2410C] shadow-lg shadow-black/20"
               >
                 🤖 IoT
               </motion.div>

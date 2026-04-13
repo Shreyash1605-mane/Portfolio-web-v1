@@ -33,7 +33,7 @@ function StarRating({ rating }: { rating: number }) {
       {Array.from({ length: 5 }).map((_, i) => (
         <Star
           key={i}
-          className={`w-4 h-4 ${
+          className={`w-5 h-5 ${
             i < rating
               ? "fill-neon-blue text-neon-blue"
               : "fill-transparent text-cyber-border"
@@ -85,7 +85,7 @@ export default function TestimonialsSection() {
             >
               <div className="relative h-full p-6 rounded-2xl border border-cyber-border bg-cyber-card/50 backdrop-blur-sm elevated-card card-shine soft-focus-ring">
                 {/* Quote Icon */}
-                <div className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-neon-blue/10 text-neon-blue mb-4 transition-transform duration-300 group-hover:scale-110">
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-neon-blue/10 text-neon-blue opacity-80 mb-5 transition-transform duration-300 group-hover:scale-110">
                   <Quote className="w-5 h-5" />
                 </div>
 
@@ -99,13 +99,18 @@ export default function TestimonialsSection() {
 
                 {/* Person Info */}
                 <div className="flex items-center justify-between">
-                  <div>
-                    <h3 className="text-base font-semibold text-silver">
-                      {testimonial.name}
-                    </h3>
-                    <p className="text-xs text-silver-dim mt-0.5">
-                      {testimonial.role}
-                    </p>
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-neon-blue/15 flex items-center justify-center text-sm font-bold text-[#C2410C] shrink-0">
+                      {testimonial.name.split(' ').map(n => n[0]).join('')}
+                    </div>
+                    <div>
+                      <h3 className="text-base font-semibold text-silver">
+                        {testimonial.name}
+                      </h3>
+                      <p className="text-xs text-silver-dim mt-0.5">
+                        {testimonial.role}
+                      </p>
+                    </div>
                   </div>
                   <StarRating rating={testimonial.rating} />
                 </div>
