@@ -11,8 +11,8 @@ const sections = [
   { key: "4", id: "milestones", label: "Milestones" },
   { key: "5", id: "projects", label: "Projects" },
   { key: "6", id: "experience", label: "Experience" },
-  { key: "7", id: "skills", label: "Skills" },
-  { key: "8", id: "current", label: "Current Focus" },
+  { key: "7", id: "certifications", label: "Certifications" },
+  { key: "8", id: "skills", label: "Skills" },
   { key: "9", id: "testimonials", label: "Testimonials" },
   { key: "0", id: "contact", label: "Contact" },
 ];

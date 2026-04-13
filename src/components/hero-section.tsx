@@ -115,7 +115,7 @@ export default function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center particle-bg overflow-hidden scanline-overlay grain-overlay"
+      className="relative min-h-screen flex items-center particle-bg overflow-hidden scanline-overlay grain-overlay mesh-gradient-bg"
     >
       {/* Interactive Particle Canvas */}
       <ParticleCanvas />

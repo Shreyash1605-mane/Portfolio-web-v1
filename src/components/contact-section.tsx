@@ -2,8 +2,35 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Send, Mail, User, MessageSquare, CheckCircle, Loader2, AlertCircle } from "lucide-react";
+import {
+  Send,
+  Mail,
+  User,
+  MessageSquare,
+  CheckCircle,
+  Loader2,
+  AlertCircle,
+  Github,
+  Linkedin,
+  Twitter,
+  Copy,
+  Check,
+} from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+
+const MAX_MESSAGE_LENGTH = 500;
+
+const presetMessages = [
+  "Let's collaborate on a project",
+  "I have a cybersecurity opportunity",
+  "Just wanted to say hi!",
+];
+
+const socialLinks = [
+  { name: "GitHub", icon: Github, href: "#" },
+  { name: "LinkedIn", icon: Linkedin, href: "#" },
+  { name: "Twitter", icon: Twitter, href: "#" },
+];
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({
@@ -14,7 +41,33 @@ export default function ContactSection() {
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [emailCopied, setEmailCopied] = useState(false);
   const { toast } = useToast();
+
+  const messageLength = formData.message.length;
+  const isNearMax = messageLength > 450;
+
+  const handlePresetMessage = (preset: string) => {
+    setFormData((prev) => ({ ...prev, message: preset }));
+  };
+
+  const handleCopyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText("maneshreyash16@gmail.com");
+      setEmailCopied(true);
+      toast({
+        title: "Email Copied!",
+        description: "maneshreyash16@gmail.com has been copied to your clipboard.",
+      });
+      setTimeout(() => setEmailCopied(false), 2000);
+    } catch {
+      toast({
+        title: "Copy Failed",
+        description: "Could not copy the email address. Please copy it manually.",
+        variant: "destructive",
+      });
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -22,16 +75,16 @@ export default function ContactSection() {
     setError(null);
 
     try {
-      const res = await fetch('/api/contact?XTransformPort=3000', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const res = await fetch("/api/contact?XTransformPort=3000", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
       const data = await res.json();
 
       if (!res.ok) {
-        const msg = data.details?.[0]?.message || data.error || 'Something went wrong.';
+        const msg = data.details?.[0]?.message || data.error || "Something went wrong.";
         setError(msg);
         return;
       }
@@ -44,7 +97,7 @@ export default function ContactSection() {
       setFormData({ name: "", email: "", message: "" });
       setTimeout(() => setSubmitted(false), 5000);
     } catch {
-      setError('Network error. Please try again.');
+      setError("Network error. Please try again.");
     } finally {
       setSending(false);
     }
@@ -118,6 +171,30 @@ export default function ContactSection() {
               </div>
             </div>
 
+            {/* Social Media Links */}
+            <div className="p-6 rounded-2xl border border-cyber-border bg-cyber-card/50 backdrop-blur-sm shadow-lg shadow-black/[0.04]">
+              <h3 className="text-lg font-bold text-silver mb-4">
+                Connect with me
+              </h3>
+              <div className="flex flex-wrap gap-3">
+                {socialLinks.map((social) => {
+                  const IconComponent = social.icon;
+                  return (
+                    <a
+                      key={social.name}
+                      href={social.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group inline-flex items-center gap-2 px-4 py-2.5 rounded-xl border border-cyber-border bg-cyber-dark/50 text-silver-dim text-sm font-medium transition-all duration-300 hover:border-neon-blue/50 hover:text-neon-blue hover:bg-neon-blue/5"
+                    >
+                      <IconComponent className="w-4 h-4 transition-transform duration-300 group-hover:scale-110" />
+                      {social.name}
+                    </a>
+                  );
+                })}
+              </div>
+            </div>
+
             {/* Availability */}
             <div className="p-6 rounded-2xl border border-emerald-400/20 bg-emerald-400/5 dark:bg-emerald-400/10">
               <div className="flex items-center gap-2 mb-2">
@@ -149,9 +226,23 @@ export default function ContactSection() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="lg:col-span-3"
           >
+            {/* Quick Message Presets */}
+            <div className="mb-4 flex flex-wrap gap-2">
+              {presetMessages.map((preset) => (
+                <button
+                  key={preset}
+                  type="button"
+                  onClick={() => handlePresetMessage(preset)}
+                  className="inline-flex items-center px-3 py-1.5 rounded-full border border-cyber-border bg-cyber-dark/50 text-silver-dim text-xs font-medium transition-all duration-300 hover:border-neon-blue/40 hover:text-neon-blue hover:bg-neon-blue/5 cursor-pointer"
+                >
+                  {preset}
+                </button>
+              ))}
+            </div>
+
             <form
               onSubmit={handleSubmit}
-              className="p-6 sm:p-8 rounded-2xl border border-cyber-border bg-cyber-card/50 backdrop-blur-sm shadow-lg shadow-black/[0.04] space-y-5"
+              className="p-6 sm:p-8 rounded-2xl border border-cyber-border bg-cyber-card/50 backdrop-blur-sm shadow-lg shadow-black/[0.04] space-y-5 premium-card-accent focus-within-glow"
             >
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
@@ -212,6 +303,7 @@ export default function ContactSection() {
                     id="message"
                     required
                     rows={5}
+                    maxLength={MAX_MESSAGE_LENGTH}
                     value={formData.message}
                     onChange={(e) =>
                       setFormData({ ...formData, message: e.target.value })
@@ -219,6 +311,18 @@ export default function ContactSection() {
                     placeholder="Tell me about your project or opportunity..."
                     className="w-full pl-10 pr-4 py-3 bg-cyber-dark border border-cyber-border rounded-lg text-silver placeholder:text-silver-dim/50 text-sm transition-all duration-300 resize-none"
                   />
+                </div>
+                {/* Character count indicator */}
+                <div className="mt-1.5 text-right">
+                  <span
+                    className={`text-xs transition-colors duration-300 ${
+                      isNearMax
+                        ? "text-red-400 font-medium"
+                        : "text-silver-dim"
+                    }`}
+                  >
+                    {messageLength}/{MAX_MESSAGE_LENGTH}
+                  </span>
                 </div>
               </div>
               {/* Error message */}
@@ -253,6 +357,25 @@ export default function ContactSection() {
                     Send Message
                   </>
                 )}
+              </button>
+
+              {/* Prefer Email CTA */}
+              <button
+                type="button"
+                onClick={handleCopyEmail}
+                className="group flex items-center gap-1.5 text-xs text-silver-dim hover:text-neon-blue transition-colors duration-300 cursor-pointer mt-2"
+              >
+                Prefer to email directly?{" "}
+                <span className="underline underline-offset-2 decoration-silver-dim/40 group-hover:decoration-neon-blue/50 transition-colors duration-300">
+                  maneshreyash16@gmail.com
+                </span>
+                <span className="inline-flex ml-0.5">
+                  {emailCopied ? (
+                    <Check className="w-3 h-3 text-emerald-400" />
+                  ) : (
+                    <Copy className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  )}
+                </span>
               </button>
             </form>
           </motion.div>

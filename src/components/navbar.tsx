@@ -12,6 +12,7 @@ const navLinks = [
   { label: "Milestones", href: "#milestones" },
   { label: "Projects", href: "#projects" },
   { label: "Experience", href: "#experience" },
+  { label: "Certifications", href: "#certifications" },
   { label: "Skills", href: "#skills" },
   { label: "Current", href: "#current-focus" },
   { label: "Testimonials", href: "#testimonials" },

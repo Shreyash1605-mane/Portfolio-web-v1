@@ -189,6 +189,7 @@ export default function FooterSection() {
               { label: "Education", href: "#education" },
               { label: "Projects", href: "#projects" },
               { label: "Experience", href: "#experience" },
+              { label: "Certifications", href: "#certifications" },
               { label: "Skills", href: "#skills" },
               { label: "Contact", href: "#contact" },
             ].map(
