@@ -6,7 +6,6 @@ import Image from "next/image";
 import { useEffect, useState, useRef } from "react";
 import ParticleCanvas from "@/components/particle-canvas";
 import TerminalShowcase from "@/components/terminal-showcase";
-import { useToast } from "@/hooks/use-toast";
 
 const roles = [
   "Cybersecurity",
@@ -103,7 +102,6 @@ function TypingText({ words, delay = 0 }: { words: string[]; delay?: number }) {
 }
 
 export default function HeroSection() {
-  const { toast } = useToast();
   const heroRef = useRef<HTMLDivElement>(null);
 
   // Mouse tracking for hero spotlight
@@ -124,40 +122,14 @@ export default function HeroSection() {
   const handleDownloadResume = async () => {
     setDownloading(true);
     try {
-      const response = await fetch("/api/resume");
-      if (!response.ok) throw new Error("Failed to generate resume");
-
-      const htmlBlob = await response.blob();
-      const blobUrl = window.URL.createObjectURL(htmlBlob);
-
-      const printWindow = window.open(blobUrl, "_blank");
-      if (printWindow) {
-        printWindow.addEventListener("load", () => {
-          setTimeout(() => {
-            printWindow.print();
-            window.URL.revokeObjectURL(blobUrl);
-          }, 250);
-        });
-      } else {
-        // Fallback: download the HTML file directly
-        const link = document.createElement("a");
-        link.href = blobUrl;
-        link.download = "Shreyash_Mane_Resume.html";
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        window.URL.revokeObjectURL(blobUrl);
-      }
-
-      toast({
-        title: "Resume Ready!",
-        description: "Use Ctrl+P / \u2318+P in the new tab to save as PDF.",
-      });
+      const link = document.createElement("a");
+      link.href = "/resume.pdf";
+      link.download = "Shreyash_Mane_Resume.pdf";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     } catch {
-      toast({
-        title: "Download Failed",
-        description: "Could not generate resume. Please try again.",
-      });
+      window.location.href = "/resume.pdf";
     } finally {
       setDownloading(false);
     }
