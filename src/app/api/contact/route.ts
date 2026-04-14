@@ -1,6 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 // Email validation regex
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -121,8 +124,9 @@ export async function POST(request: NextRequest) {
 }
 
 // GET: Retrieve all contact messages (admin purposes)
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
+    void request.url;
     const messages = await db.contactMessage.findMany({
       orderBy: {
         createdAt: "desc",

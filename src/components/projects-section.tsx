@@ -45,7 +45,7 @@ const projects: Project[] = [
   {
     id: 1,
     title: "Smart Parking System",
-    image: "/images/smart-parking.png",
+    image: "https://drive.google.com/uc?export=view&id=1WuwCd4n80xd9mlXpjEGsivxRiVq9Wglp",
     tags: ["Arduino", "ESP32", "IoT", "IR Sensors", "C++", "LED Dashboard"],
     category: "IoT & Embedded",
     filterCategory: "iot",
@@ -70,7 +70,7 @@ const projects: Project[] = [
   {
     id: 2,
     title: "E-Grampanchayat Portal",
-    image: "/images/grampanchayat.png",
+    image: "https://drive.google.com/uc?export=view&id=1sH9i6j7nlm5MjEfzqhFMlm-ktKkBK0M7",
     tags: ["HTML", "JavaScript", "MySQL", "PHP", "CSS", "Web Dev"],
     category: "Web Development",
     filterCategory: "web",
@@ -89,17 +89,17 @@ const projects: Project[] = [
       "Admin dashboard with analytics",
     ],
     impact: "Digitized village administration, improving transparency and accessibility.",
-    github: "#",
-    demo: "#",
+    github: "https://github.com/Shreyash1605-mane/E-GRAMPANCHYAT-ay",
+    demo: "https://v0-egrampanchyat-app-design.vercel.app/",
   },
   {
     id: 3,
     title: "Disease Prediction System",
-    image: "/images/disease-prediction.png",
+    image: "https://drive.google.com/uc?export=view&id=1a2EQIlffvjcuyuDCRD13XPyZkIG-W8LO",
     tags: ["Python", "Scikit-learn", "Pandas", "ML", "NumPy", "Flask"],
     category: "Machine Learning",
     filterCategory: "ml",
-    status: "in-progress",
+    status: "completed",
     description:
       "Supervised learning models for predicting diseases based on patient symptoms and medical history data.",
     fullDescription:
@@ -114,6 +114,81 @@ const projects: Project[] = [
       "Cross-validated model comparison",
     ],
     impact: "Enabled early disease detection through data-driven predictions.",
+    github: "https://github.com/Shreyash1605-mane/Diseases_Prediction_model",
+    demo: "https://github.com/Shreyash1605-mane/Diseases_Prediction_model",
+  },
+  {
+    id: 4,
+    title: "AI Chatbot for Next.js",
+    image: "https://drive.google.com/uc?export=view&id=1g1EKVICi4_4-MGIICRnVzzrwxUYHZudv",
+    tags: ["Next.js", "TypeScript", "OpenAI API", "Tailwind CSS", "Vercel", "REST API"],
+    category: "Web Development",
+    filterCategory: "ml",
+    status: "completed",
+    description:
+      "Conversational AI chatbot built with Next.js, featuring real-time responses, clean UI, and deploy-ready architecture.",
+    fullDescription:
+      "The AI Chatbot for Next.js is an interactive web application designed to provide fast, context-aware responses through a modern chat interface. It uses a Next.js frontend with API routes to securely handle prompt processing and model communication. The project focuses on responsive design, low-latency message rendering, and maintainable component architecture. It includes conversation history, input validation, loading/error states, and deployment optimization for Vercel. This project demonstrates practical integration of AI-powered interaction patterns into a production-style web stack.",
+    techDetails:
+      "Built with Next.js and TypeScript, styled using Tailwind CSS, and connected to AI model endpoints through secure API routes. Includes reusable chat components, state management for message threads, robust error handling, and deployment-ready configuration.",
+    features: [
+      "Interactive real-time chat interface",
+      "API route based model integration",
+      "Conversation history management",
+      "Loading and error-state handling",
+      "Responsive and deployment-ready UI",
+    ],
+    impact: "Showcased practical AI integration in a production-style Next.js application.",
+    github: "#",
+    demo: "https://nextjs-ai-chatbot-umber-two-25.vercel.app/",
+  },
+  {
+    id: 5,
+    title: "NyayaSetu",
+    image: "https://drive.google.com/uc?export=view&id=1wFWbDE6RLuEsmOWDvvOLFi5JMuau4Nmc",
+    tags: ["Next.js", "TypeScript", "Legal Tech", "MongoDB", "Tailwind CSS", "Node.js"],
+    category: "Web Development",
+    filterCategory: "web",
+    status: "in-progress",
+    description:
+      "Legal assistance platform that helps users understand legal processes, rights, and basic document workflows.",
+    fullDescription:
+      "NyayaSetu is a legal-tech platform designed to make legal support more accessible and understandable for everyday users. The project provides simplified legal guidance flows, document-oriented assistance, and structured pathways for users to explore legal actions. It focuses on reducing complexity in legal communication through clear UI, categorized service modules, and guided user journeys. Built as a modern full-stack web application, NyayaSetu demonstrates practical problem-solving for civic and legal awareness use cases.",
+    techDetails:
+      "Built with Next.js and TypeScript for a scalable frontend architecture, with backend API integration and database-backed user workflows. The interface is styled with Tailwind CSS and designed for responsive legal-service navigation.",
+    features: [
+      "Guided legal information modules",
+      "Document assistance workflow",
+      "Category-based legal services",
+      "Responsive user-friendly interface",
+      "Role-ready scalable architecture",
+    ],
+    impact: "Improved legal awareness and accessibility by simplifying legal guidance for general users.",
+    github: "#",
+    demo: "#",
+  },
+  {
+    id: 6,
+    title: "AI Financial Advisory",
+    image: "https://i.pinimg.com/1200x/55/a0/f3/55a0f3013d0cbfb4e4057687f206c892.jpg",
+    tags: ["Python", "Machine Learning", "FinTech", "Forecasting", "Streamlit", "Pandas"],
+    category: "Machine Learning",
+    filterCategory: "ml",
+    status: "in-progress",
+    description:
+      "AI-powered financial advisory system for budgeting insights, risk profiling, and personalized recommendations.",
+    fullDescription:
+      "AI Financial Advisory is a fintech-focused intelligent advisory project that helps users make better financial decisions through data-driven analysis. The system processes user financial inputs, spending behavior, and target goals to generate actionable recommendations for budgeting, savings, and risk-aware planning. It combines analytics and predictive modeling to provide insight-driven support and improve decision confidence. The product is designed to be explainable, practical, and adaptable for individual financial planning scenarios.",
+    techDetails:
+      "Developed using Python and data-science tooling with machine learning-based recommendation logic. It includes preprocessing pipelines, feature extraction on financial habits, and an interactive dashboard layer for delivering advisory results.",
+    features: [
+      "Personalized budgeting recommendations",
+      "Risk profile based suggestions",
+      "Spending pattern analysis",
+      "Goal-based financial planning insights",
+      "Interactive advisory dashboard",
+    ],
+    impact: "Helped translate complex financial data into practical and personalized advisory guidance.",
     github: "#",
     demo: "#",
   },
@@ -123,7 +198,7 @@ const filterCategories = [
   { key: "all", label: "All Projects" },
   { key: "iot", label: "IoT" },
   { key: "web", label: "Web Dev" },
-  { key: "ml", label: "ML / AI" },
+  { key: "ml", label: "ML" },
 ];
 
 function StatusBadge({ status }: { status: ProjectStatus }) {

@@ -108,7 +108,6 @@ export default function KeyboardNavigation() {
               onClick={() => setIsPaletteOpen(true)}
               className="flex items-center gap-2 px-3 py-2 rounded-lg bg-cyber-card/80 border border-cyber-border backdrop-blur-sm text-silver-dim text-xs hover:text-silver hover:border-neon-blue/30 transition-all duration-300 shadow-lg shadow-black/5"
             >
-              <Command className="w-3.5 h-3.5" />
               <span>Press</span>
               <kbd className="px-1.5 py-0.5 rounded bg-cyber-dark border border-cyber-border text-[10px] font-mono">
                 1-9

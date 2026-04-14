@@ -386,7 +386,7 @@ export default function HeroSection() {
                 {/* Neon glow container */}
                 <div className="absolute inset-4 rounded-full neon-glow overflow-hidden" style={{ boxShadow: '0 8px 40px rgba(59,130,246,0.2), 0 0 60px rgba(59,130,246,0.08)' }}>
                   <Image
-                    src="/images/headshot.png"
+                    src="https://drive.google.com/uc?export=view&id=14nK4P9w91_dfAR6S9Uy2AM8JdmjfSMn0"
                     alt="Shreyash Mane"
                     fill
                     sizes="(max-width: 768px) 256px, (max-width: 1024px) 320px, 384px"
