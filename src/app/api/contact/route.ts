@@ -1,6 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { db } from "@/lib/db";
-
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
@@ -78,14 +76,15 @@ export async function POST(request: NextRequest) {
     const sanitizedEmail = email.trim().toLowerCase();
     const sanitizedMessage = message.trim();
 
-    // Create contact message in database
-    const contactMessage = await db.contactMessage.create({
-      data: {
-        name: sanitizedName,
-        email: sanitizedEmail,
-        message: sanitizedMessage,
-      },
-    });
+    // Commented out DB interaction
+    // const contactMessage = await db.contactMessage.create({ ... })
+    const contactMessage = {
+      id: "mock_" + Date.now().toString(),
+      name: sanitizedName,
+      email: sanitizedEmail,
+      message: sanitizedMessage,
+      createdAt: new Date(),
+    };
 
     return NextResponse.json(
       {
@@ -127,11 +126,7 @@ export async function POST(request: NextRequest) {
 export async function GET(request: NextRequest) {
   try {
     void request.url;
-    const messages = await db.contactMessage.findMany({
-      orderBy: {
-        createdAt: "desc",
-      },
-    });
+    const messages: any[] = []; // No database connected
 
     return NextResponse.json(
       {
